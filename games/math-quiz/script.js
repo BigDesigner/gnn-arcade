@@ -1,7 +1,7 @@
-/**
+﻿/**
  * GNNgame: Math Quiz - ULTIMATE Phaser Version
- * Özellikler: Fizikli Balonlar, Dairesel Timer, Streak Sistemi,
- *             Animasyonlu Soru Kartı, Particle Efektleri, Canlı Tema
+ * Ã–zellikler: Fizikli Balonlar, Dairesel Timer, Streak Sistemi,
+ *             Animasyonlu Soru KartÄ±, Particle Efektleri, CanlÄ± Tema
  */
 export default class MathQuiz extends Phaser.Scene {
     constructor() {
@@ -23,21 +23,21 @@ export default class MathQuiz extends Phaser.Scene {
         this.difficulty = 'easy';
     }
 
-    // ─────────────────────────────── CREATE ───────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CREATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     create() {
         this.buildBackground();
         this.buildParticles();
         this.showMenu();
     }
 
-    // ─────────────────────────────── BACKGROUND ───────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BACKGROUND â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     buildBackground() {
-        // Gradyan benzeri arka plan (açık mor → lacivert)
+        // Gradyan benzeri arka plan (aÃ§Ä±k mor â†’ lacivert)
         const bg = this.add.graphics();
         bg.fillGradientStyle(0x1a1a4e, 0x1a1a4e, 0x3a0ca3, 0x3a0ca3, 1);
         bg.fillRect(0, 0, this.width, this.height);
 
-        // Geometrik şekil - yüzer kareler
+        // Geometrik ÅŸekil - yÃ¼zer kareler
         for (let i = 0; i < 12; i++) {
             const size = Phaser.Math.Between(20, 60);
             const x = Phaser.Math.Between(0, this.width);
@@ -56,7 +56,7 @@ export default class MathQuiz extends Phaser.Scene {
             });
         }
 
-        // Yıldız benzeri parıltılar
+        // YÄ±ldÄ±z benzeri parÄ±ltÄ±lar
         for (let i = 0; i < 30; i++) {
             const star = this.add.circle(
                 Phaser.Math.Between(0, this.width),
@@ -72,7 +72,7 @@ export default class MathQuiz extends Phaser.Scene {
     }
 
     buildParticles() {
-        // Konfeti parçacığı
+        // Konfeti parÃ§acÄ±ÄŸÄ±
         const gConf = this.make.graphics({ x: 0, y: 0, add: false });
         gConf.fillStyle(0xffffff, 1);
         gConf.fillRect(0, 0, 6, 6);
@@ -88,7 +88,7 @@ export default class MathQuiz extends Phaser.Scene {
             emitting: false
         });
 
-        // Yanlış cevap kıvılcımı
+        // YanlÄ±ÅŸ cevap kÄ±vÄ±lcÄ±mÄ±
         const gSpark = this.make.graphics({ x: 0, y: 0, add: false });
         gSpark.fillStyle(0xFF4444, 1);
         gSpark.fillCircle(4, 4, 4);
@@ -102,22 +102,22 @@ export default class MathQuiz extends Phaser.Scene {
         });
     }
 
-    // ─────────────────────────────── MENU ─────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MENU â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     showMenu() {
         this.clearScene();
         this.gameOver = false;
         this.score = 0;
         this.streak = 0;
 
-        // Başlık
-        const title = this.add.text(this.width / 2, 160, '🧮 Matematik Avcısı', {
+        // BaÅŸlÄ±k
+        const title = this.add.text(this.width / 2, 160, 'ğŸ§® Matematik AvcÄ±sÄ±', {
             fontSize: '64px', fill: '#ffffff',
             fontFamily: 'Nunito', fontWeight: 'bold',
             shadow: { offsetX: 3, offsetY: 3, color: '#000', blur: 10, fill: true }
         }).setOrigin(0.5);
         this.tweens.add({ targets: title, y: 170, duration: 1500, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 
-        const subtitle = this.add.text(this.width / 2, 240, 'Bir zorluk seviyesi seç!', {
+        const subtitle = this.add.text(this.width / 2, 240, 'Bir zorluk seviyesi seÃ§!', {
             fontSize: '28px', fill: '#c8b8ff', fontFamily: 'Nunito'
         }).setOrigin(0.5);
 
@@ -125,8 +125,8 @@ export default class MathQuiz extends Phaser.Scene {
 
         const levels = [
             { key: 'easy', label: 'Kolay', desc: 'Toplama  (1-10)', color: 0x06D6A0, glow: 0x03f0a0 },
-            { key: 'medium', label: 'Orta', desc: 'Çıkarma & Toplama', color: 0xFFD166, glow: 0xffc107 },
-            { key: 'hard', label: 'Zor', desc: 'Çarpma  (2×2 - 12×12)', color: 0xf72585, glow: 0xff006e }
+            { key: 'medium', label: 'Orta', desc: 'Ã‡Ä±karma & Toplama', color: 0xFFD166, glow: 0xffc107 },
+            { key: 'hard', label: 'Zor', desc: 'Ã‡arpma  (2Ã—2 - 12Ã—12)', color: 0xf72585, glow: 0xff006e }
         ];
 
         levels.forEach((lv, i) => {
@@ -137,7 +137,7 @@ export default class MathQuiz extends Phaser.Scene {
             const bg = this.add.graphics();
             bg.fillStyle(lv.color, 1);
             bg.fillRoundedRect(-220, -38, 440, 76, 38);
-            // İnce border glow efekti
+            // Ä°nce border glow efekti
             bg.lineStyle(3, lv.glow, 0.7);
             bg.strokeRoundedRect(-220, -38, 440, 76, 38);
 
@@ -153,7 +153,7 @@ export default class MathQuiz extends Phaser.Scene {
             card.on('pointerout', () => this.tweens.add({ targets: card, scaleX: 1, scaleY: 1, duration: 120 }));
             card.on('pointerdown', () => this.startGame(lv.key));
 
-            // Kart giriş animasyonu
+            // Kart giriÅŸ animasyonu
             this.tweens.add({ targets: card, y: y, alpha: 1, duration: 400, delay: i * 120, ease: 'Back.easeOut' });
         });
     }
@@ -170,7 +170,7 @@ export default class MathQuiz extends Phaser.Scene {
         if (this.gameUI) { this.gameUI.forEach(o => o.destroy()); this.gameUI = []; }
     }
 
-    // ─────────────────────────────── GAME START ───────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ GAME START â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     startGame(diff) {
         this.difficulty = diff;
         this.score = 0;
@@ -179,7 +179,7 @@ export default class MathQuiz extends Phaser.Scene {
         this.clearScene();
         this.gameUI = [];
 
-        // ── Skor Panosu
+        // â”€â”€ Skor Panosu
         const scoreBg = this.add.graphics({ x: 30, y: 25 }).setDepth(99);
         scoreBg.fillStyle(0x1a1a4e, 0.9);
         scoreBg.fillRoundedRect(0, 0, 220, 60, 16);
@@ -187,12 +187,12 @@ export default class MathQuiz extends Phaser.Scene {
         scoreBg.strokeRoundedRect(0, 0, 220, 60, 16);
         this.gameUI.push(scoreBg);
 
-        this.scoreTxt = this.add.text(140, 55, '⭐ Skor: 0', {
+        this.scoreTxt = this.add.text(140, 55, 'â­ Skor: 0', {
             fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
         this.gameUI.push(this.scoreTxt);
 
-        // ── Canlar (❤️ ikonları) Panosu (Sağ Üst)
+        // â”€â”€ Canlar (â¤ï¸ ikonlarÄ±) Panosu (SaÄŸ Ãœst)
         const livesBg = this.add.graphics({ x: this.width - 190, y: 25 }).setDepth(99);
         livesBg.fillStyle(0x1a1a4e, 0.9);
         livesBg.fillRoundedRect(0, 0, 160, 60, 16);
@@ -202,12 +202,12 @@ export default class MathQuiz extends Phaser.Scene {
 
         this.lifeIcons = [];
         for (let i = 0; i < 3; i++) {
-            const icon = this.add.text(this.width - 150 + i * 42, 55, '❤️', { fontSize: '28px' }).setOrigin(0.5).setDepth(100);
+            const icon = this.add.text(this.width - 150 + i * 42, 55, 'â¤ï¸', { fontSize: '28px' }).setOrigin(0.5).setDepth(100);
             this.lifeIcons.push(icon);
             this.gameUI.push(icon);
         }
 
-        // ── Süre Barı (Modern Progress Bar - Top Center)
+        // â”€â”€ SÃ¼re BarÄ± (Modern Progress Bar - Top Center)
         const timerBg = this.add.graphics().setDepth(99);
         timerBg.fillStyle(0x1a1a4e, 0.9);
         timerBg.fillRoundedRect(this.width / 2 - 200, 25, 400, 46, 23);
@@ -218,18 +218,18 @@ export default class MathQuiz extends Phaser.Scene {
         this.timerGraphics = this.add.graphics().setDepth(100);
         this.gameUI.push(this.timerGraphics);
 
-        this.timerLabel = this.add.text(this.width / 2, 48, '⏳ 12', {
+        this.timerLabel = this.add.text(this.width / 2, 48, 'â³ 12', {
             fontSize: '24px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(101);
         this.gameUI.push(this.timerLabel);
 
-        // ── Streak (Seri)
+        // â”€â”€ Streak (Seri)
         this.streakTxt = this.add.text(30, 95, '', {
             fontSize: '24px', fill: '#FFD166', fontFamily: 'Nunito', fontWeight: '900'
         });
         this.gameUI.push(this.streakTxt);
 
-        // ── Soru Kartı (başlangıçta görünmez)
+        // â”€â”€ Soru KartÄ± (baÅŸlangÄ±Ã§ta gÃ¶rÃ¼nmez)
         this.questionCard = this.buildQuestionCard();
         this.gameUI.push(this.questionCard);
 
@@ -252,7 +252,7 @@ export default class MathQuiz extends Phaser.Scene {
         return card;
     }
 
-    // ─────────────────────────────── QUESTION ─────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ QUESTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     generateQuestion() {
         if (this.gameOver) return;
 
@@ -270,20 +270,20 @@ export default class MathQuiz extends Phaser.Scene {
         } else {
             n1 = Phaser.Math.Between(2, 12);
             n2 = Phaser.Math.Between(2, 12);
-            op = '×'; ans = n1 * n2;
+            op = 'Ã—'; ans = n1 * n2;
         }
 
         this.question = { text: `${n1} ${op} ${n2} = ?`, answer: ans };
         this.questionTxt.setText(this.question.text);
 
-        // Kart giriş animasyonu
+        // Kart giriÅŸ animasyonu
         this.questionCard.y = -150;
         this.tweens.add({
             targets: this.questionCard, y: 155,
             duration: 400, ease: 'Back.easeOut'
         });
 
-        // 3 yanlış cevap üret, doğru cevap kesin olarak dahil et
+        // 3 yanlÄ±ÅŸ cevap Ã¼ret, doÄŸru cevap kesin olarak dahil et
         const wrongs = [];
         let attempts = 0;
         while (wrongs.length < 3 && attempts < 100) {
@@ -294,13 +294,13 @@ export default class MathQuiz extends Phaser.Scene {
                 wrongs.push(v);
             }
         }
-        // 4 seçenek: 3 yanlış + 1 doğru, karıştır
+        // 4 seÃ§enek: 3 yanlÄ±ÅŸ + 1 doÄŸru, karÄ±ÅŸtÄ±r
         const opts = Phaser.Utils.Array.Shuffle([ans, ...wrongs]);
         this.spawnBubbles(opts);
         this.startTimer();
     }
 
-    // ─────────────────────────────── BUBBLES ──────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BUBBLES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     spawnBubbles(opts) {
         this.bubbles.forEach(b => b.container.destroy());
         this.bubbles = [];
@@ -325,7 +325,7 @@ export default class MathQuiz extends Phaser.Scene {
             g.fillStyle(0xffffff, 0.25);
             g.fillEllipse(-22, -24, 30, 18);
 
-            // Değer metni
+            // DeÄŸer metni
             const txt = this.add.text(0, 4, String(val), {
                 fontSize: '52px', fill: '#fff',
                 fontFamily: 'Nunito', fontWeight: 'bold'
@@ -338,12 +338,12 @@ export default class MathQuiz extends Phaser.Scene {
             c.on('pointerover', () => this.tweens.add({ targets: c, scale: 1.12, duration: 100 }));
             c.on('pointerout', () => this.tweens.add({ targets: c, scale: 1.0, duration: 100 }));
 
-            // Giriş animasyonu (aşağıdan yukarı) → bitince sallantı başlar
+            // GiriÅŸ animasyonu (aÅŸaÄŸÄ±dan yukarÄ±) â†’ bitince sallantÄ± baÅŸlar
             this.tweens.add({
                 targets: c, y: targetY, duration: 500 + i * 80,
                 ease: 'Back.easeOut', delay: i * 60,
                 onComplete: () => {
-                    // Sallantı tweeni sadece giriş bittikten sonra başlar
+                    // SallantÄ± tweeni sadece giriÅŸ bittikten sonra baÅŸlar
                     this.tweens.add({
                         targets: c,
                         y: targetY - Phaser.Math.Between(18, 35),
@@ -358,18 +358,18 @@ export default class MathQuiz extends Phaser.Scene {
         });
     }
 
-    // ─────────────────────────────── TIMER ────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TIMER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     startTimer() {
         if (this.timerEvent) this.timerEvent.remove();
         this.timeLeft = this.totalTime;
-        this.timerLabel.setText('⏳ ' + this.timeLeft).setFill('#fff');
+        this.timerLabel.setText('â³ ' + this.timeLeft).setFill('#fff');
         this.drawTimerArc(1);
 
         this.timerEvent = this.time.addEvent({
             delay: 1000,
             callback: () => {
                 this.timeLeft--;
-                this.timerLabel.setText('⏳ ' + this.timeLeft);
+                this.timerLabel.setText('â³ ' + this.timeLeft);
                 const ratio = this.timeLeft / this.totalTime;
                 this.drawTimerArc(ratio);
                 if (this.timeLeft <= 3) this.timerLabel.setFill('#EF476F');
@@ -384,7 +384,7 @@ export default class MathQuiz extends Phaser.Scene {
         this.timerGraphics.clear();
 
         // Timer bar draw (uzun progress bar)
-        // Maksimum bar genişliği 384 (padding 8 solda sağda)
+        // Maksimum bar geniÅŸliÄŸi 384 (padding 8 solda saÄŸda)
         const maxW = 384;
         const w = maxW * ratio;
         const color = ratio > 0.4 ? 0x06D6A0 : ratio > 0.2 ? 0xFFD166 : 0xEF476F;
@@ -393,7 +393,7 @@ export default class MathQuiz extends Phaser.Scene {
         if (w > 12) {
             this.timerGraphics.fillRoundedRect(this.width / 2 - 192, 33, w, 30, 15);
         } else {
-            // Sona doğru yuvarlanma bozulmasın diye
+            // Sona doÄŸru yuvarlanma bozulmasÄ±n diye
             this.timerGraphics.fillCircle(this.width / 2 - 192 + 15, 48, 15);
         }
     }
@@ -402,34 +402,34 @@ export default class MathQuiz extends Phaser.Scene {
         this.streak = 0;
         this.multiplier = 1;
         this.updateStreakUI();
-        // Süre bitti: 1 can al
+        // SÃ¼re bitti: 1 can al
         this.loseLife(() => this.generateQuestion());
     }
 
-    // ─────────────────────────────── ANSWER ───────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ ANSWER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     handleAnswer(val, entry) {
         if (this.gameOver) return;
         if (this.timerEvent) this.timerEvent.remove();
 
         if (val === this.question.answer) {
-            // ✅ DOĞRU
+            // âœ… DOÄRU
             this.streak++;
             this.multiplier = this.streak >= 5 ? 3 : this.streak >= 3 ? 2 : 1;
             const gained = 10 * this.multiplier;
             this.score += gained;
-            this.scoreTxt.setText(`⭐ Skor: ${this.score}`);
+            this.scoreTxt.setText(`â­ Skor: ${this.score}`);
             this.updateStreakUI();
 
-            // Puan uçuşu
+            // Puan uÃ§uÅŸu
             const pt = this.add.text(entry.container.x, entry.container.y - 20, `+${gained}`, {
                 fontSize: '48px', fill: '#FFD166', fontFamily: 'Nunito', fontWeight: 'bold'
             }).setOrigin(0.5).setShadow(2, 2, '#000', 5);
             this.tweens.add({ targets: pt, y: pt.y - 120, alpha: 0, duration: 700, onComplete: () => pt.destroy() });
 
-            // Konfeti patlaması
+            // Konfeti patlamasÄ±
             this.confetti.emitParticleAt(entry.container.x, entry.container.y, 30);
 
-            // Kamera flash yeşil
+            // Kamera flash yeÅŸil
             this.cameras.main.flash(100, 6, 214, 160, 0.3);
 
             // Balonu patlat
@@ -439,7 +439,7 @@ export default class MathQuiz extends Phaser.Scene {
             });
 
         } else {
-            // ❌ YANLIŞ
+            // âŒ YANLIÅ
             this.streak = 0;
             this.multiplier = 1;
             this.updateStreakUI();
@@ -484,17 +484,17 @@ export default class MathQuiz extends Phaser.Scene {
 
     updateStreakUI() {
         if (this.streak >= 5) {
-            this.streakTxt.setText(`🔥 ALEV! ${this.streak} seri × ${this.multiplier}`).setFill('#FF4500');
+            this.streakTxt.setText(`ğŸ”¥ ALEV! ${this.streak} seri Ã— ${this.multiplier}`).setFill('#FF4500');
         } else if (this.streak >= 3) {
-            this.streakTxt.setText(`⚡ Seri: ${this.streak} × ${this.multiplier}`).setFill('#FFD166');
+            this.streakTxt.setText(`âš¡ Seri: ${this.streak} Ã— ${this.multiplier}`).setFill('#FFD166');
         } else if (this.streak > 0) {
-            this.streakTxt.setText(`✅ Seri: ${this.streak}`).setFill('#06D6A0');
+            this.streakTxt.setText(`âœ… Seri: ${this.streak}`).setFill('#06D6A0');
         } else {
             this.streakTxt.setText('');
         }
     }
 
-    // ─────────────────────────────── GAME OVER ────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ GAME OVER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     triggerGameOver() {
         if (this.gameOver) return;
         this.gameOver = true;
@@ -518,7 +518,7 @@ export default class MathQuiz extends Phaser.Scene {
         panel.strokeRoundedRect(this.width / 2 - 300, this.height / 2 - 180, 600, 360, 24);
         this.gameOverObjs.push(panel);
 
-        const t1 = this.add.text(this.width / 2, this.height / 2 - 120, 'OYUN BİTTİ!', {
+        const t1 = this.add.text(this.width / 2, this.height / 2 - 120, 'OYUN BÄ°TTÄ°!', {
             fontSize: '64px', fill: '#EF476F', fontFamily: 'Nunito', fontWeight: 'bold'
         }).setOrigin(0.5);
         this.gameOverObjs.push(t1);
@@ -529,13 +529,13 @@ export default class MathQuiz extends Phaser.Scene {
         this.gameOverObjs.push(t2);
 
         if (newRecord) {
-            const t3 = this.add.text(this.width / 2, this.height / 2 + 50, '🎉 YENİ REKOR! 🎉', {
+            const t3 = this.add.text(this.width / 2, this.height / 2 + 50, 'ğŸ‰ YENÄ° REKOR! ğŸ‰', {
                 fontSize: '38px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: 'bold'
             }).setOrigin(0.5);
             this.gameOverObjs.push(t3);
         }
 
-        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Menüye dönmek için tıklayın', {
+        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'MenÃ¼ye dÃ¶nmek iÃ§in tÄ±klayÄ±n', {
             fontSize: '26px', fill: '#aaa', fontFamily: 'Nunito'
         }).setOrigin(0.5);
         this.gameOverObjs.push(t4);
@@ -546,9 +546,9 @@ export default class MathQuiz extends Phaser.Scene {
         });
     }
 
-    // ─────────────────────────────── UPDATE ───────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ UPDATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     update() {
-        // Arka plandaki şekiller kendi tween döngülerinde zaten hareketli.
-        // Timer arc her saniye güncelleniyor, burada ek işlem yok.
+        // Arka plandaki ÅŸekiller kendi tween dÃ¶ngÃ¼lerinde zaten hareketli.
+        // Timer arc her saniye gÃ¼ncelleniyor, burada ek iÅŸlem yok.
     }
 }

@@ -1,7 +1,7 @@
-/**
- * GNNgame: Dino Jetpack - Yaratıcı "Gazoz Jetpack" Teması
- * Özellikler: Sonsuz Kaydırma, Parçacık Efektleri, Dinamik Engeller,
- *             Kamera Sarsıntısı, Pürüzsüz Fizik, Yüksek Etkileşim
+﻿/**
+ * GNNgame: Dino Jetpack - YaratÄ±cÄ± "Gazoz Jetpack" TemasÄ±
+ * Ã–zellikler: Sonsuz KaydÄ±rma, ParÃ§acÄ±k Efektleri, Dinamik Engeller,
+ *             Kamera SarsÄ±ntÄ±sÄ±, PÃ¼rÃ¼zsÃ¼z Fizik, YÃ¼ksek EtkileÅŸim
  */
 export default class SkyTraveler extends Phaser.Scene {
     constructor() {
@@ -18,54 +18,54 @@ export default class SkyTraveler extends Phaser.Scene {
     }
 
     preload() {
-        // Harici görsel kullanmıyoruz, her şeyi kodla (prosedürel) çizeceğiz
+        // Harici gÃ¶rsel kullanmÄ±yoruz, her ÅŸeyi kodla (prosedÃ¼rel) Ã§izeceÄŸiz
     }
 
     create() {
-        // ── ARKA PLAN (Tarih Öncesi Gün Batımı) ──
+        // â”€â”€ ARKA PLAN (Tarih Ã–ncesi GÃ¼n BatÄ±mÄ±) â”€â”€
         this.buildPrehistoricBackground();
 
-        // ── OYUNCU (DİNO ve GAZOZ JETPACK) ──
+        // â”€â”€ OYUNCU (DÄ°NO ve GAZOZ JETPACK) â”€â”€
         this.birdContainer = this.add.container(250, this.height / 2);
         
-        // Jetpack Sırt Çantası (Görsel)
+        // Jetpack SÄ±rt Ã‡antasÄ± (GÃ¶rsel)
         const jetpack = this.add.graphics();
         jetpack.fillStyle(0x00A8E8, 1); // Gazoz mavisi
-        jetpack.fillRoundedRect(-35, -10, 20, 35, 8); // Dinozorun sırtında
+        jetpack.fillRoundedRect(-35, -10, 20, 35, 8); // Dinozorun sÄ±rtÄ±nda
         jetpack.fillStyle(0xffffff, 0.8);
         jetpack.fillRoundedRect(-30, -5, 10, 15, 4); // Etiket
         jetpack.fillStyle(0xcccccc, 1);
         jetpack.fillRect(-30, -20, 10, 10); // Kapak
 
-        // Dinozor Emojisi (Yatay Çevrilmiş - Sağa Baksın)
-        this.birdVisual = this.add.text(0, 0, '🦖', { fontSize: '64px' }).setOrigin(0.5).setScale(-1, 1);
+        // Dinozor Emojisi (Yatay Ã‡evrilmiÅŸ - SaÄŸa BaksÄ±n)
+        this.birdVisual = this.add.text(0, 0, 'ğŸ¦–', { fontSize: '64px' }).setOrigin(0.5).setScale(-1, 1);
         
         this.birdContainer.add([jetpack, this.birdVisual]);
 
-        // Fizik gövdesi (container'a fizik ekliyoruz)
+        // Fizik gÃ¶vdesi (container'a fizik ekliyoruz)
         this.physics.add.existing(this.birdContainer);
         this.birdContainer.body.setGravityY(1600);
         this.birdContainer.body.setCollideWorldBounds(false);
         this.birdContainer.body.setSize(45, 55);
-        this.birdContainer.body.setOffset(-22.5, -27.5); // Çarpışma kutusunu merkeze oturt
+        this.birdContainer.body.setOffset(-22.5, -27.5); // Ã‡arpÄ±ÅŸma kutusunu merkeze oturt
 
-        // ── ENGEL GRUPLARI ──
+        // â”€â”€ ENGEL GRUPLARI â”€â”€
         this.obstacles = this.add.group();
         this.scoreSensors = this.add.group();
 
-        // ── PARÇACIKLAR ──
+        // â”€â”€ PARÃ‡ACIKLAR â”€â”€
         this.buildParticles();
 
-        // ── ARAYÜZ (UI) JUNGLE PANOLARI ──
+        // â”€â”€ ARAYÃœZ (UI) JUNGLE PANOLARI â”€â”€
         
         // Skor Panosu
         const scoreBg = this.add.graphics({ x: 30, y: 30 }).setDepth(99);
-        scoreBg.fillStyle(0x27131B, 0.9); // Koyu kahve / Orman karanlığı
+        scoreBg.fillStyle(0x27131B, 0.9); // Koyu kahve / Orman karanlÄ±ÄŸÄ±
         scoreBg.fillRoundedRect(0, 0, 240, 70, 20);
-        scoreBg.lineStyle(5, 0xFFD166, 1); // Altın sarısı çerçeve
+        scoreBg.lineStyle(5, 0xFFD166, 1); // AltÄ±n sarÄ±sÄ± Ã§erÃ§eve
         scoreBg.strokeRoundedRect(0, 0, 240, 70, 20);
 
-        this.scoreTxt = this.add.text(150, 65, '🍾 Skor: 0', {
+        this.scoreTxt = this.add.text(150, 65, 'ğŸ¾ Skor: 0', {
             fontSize: '36px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
 
@@ -77,23 +77,23 @@ export default class SkyTraveler extends Phaser.Scene {
             const recBg = this.add.graphics({ x: this.width - 270, y: 35 }).setDepth(99);
             recBg.fillStyle(0x27131B, 0.9);
             recBg.fillRoundedRect(0, 0, 240, 60, 16);
-            recBg.lineStyle(4, 0x06D6A0, 1); // Orman yeşili çerçeve
+            recBg.lineStyle(4, 0x06D6A0, 1); // Orman yeÅŸili Ã§erÃ§eve
             recBg.strokeRoundedRect(0, 0, 240, 60, 16);
 
-            this.add.text(this.width - 150, 65, `👑 Rekor: ${highScore}`, {
+            this.add.text(this.width - 150, 65, `ğŸ‘‘ Rekor: ${highScore}`, {
                 fontSize: '28px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: '900'
             }).setOrigin(0.5).setDepth(100);
         }
 
-        // ── KONTROLLER ──
+        // â”€â”€ KONTROLLER â”€â”€
         this.input.on('pointerdown', () => this.jump());
         this.cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on('keydown-SPACE', () => this.jump());
 
-        // ── BAŞLANGIÇ DURUMU ──
+        // â”€â”€ BAÅLANGIÃ‡ DURUMU â”€â”€
         this.birdContainer.body.enable = false;
         
-        // Idle süzülme animasyonu
+        // Idle sÃ¼zÃ¼lme animasyonu
         this.idleTween = this.tweens.add({
             targets: this.birdContainer,
             y: this.birdContainer.y - 25,
@@ -107,42 +107,42 @@ export default class SkyTraveler extends Phaser.Scene {
     }
 
     buildPrehistoricBackground() {
-        // Turuncu - Kırmızı Günbatımı Gradyanı
+        // Turuncu - KÄ±rmÄ±zÄ± GÃ¼nbatÄ±mÄ± GradyanÄ±
         const bg = this.add.graphics();
         bg.fillGradientStyle(0xFF7B00, 0xFF7B00, 0x761100, 0x761100, 1);
         bg.fillRect(0, 0, this.width, this.height);
 
-        // Dev Günbatımı Güneşi
+        // Dev GÃ¼nbatÄ±mÄ± GÃ¼neÅŸi
         this.add.circle(this.width/2, this.height/2 + 50, 250, 0xFFEA00, 0.15);
         this.add.circle(this.width/2, this.height/2 + 50, 180, 0xFFEA00, 0.4);
         this.add.circle(this.width/2, this.height/2 + 50, 120, 0xFFEA00, 0.8);
 
-        // Arka plan Parallax Dağlar/Yanardağlar (Çok Yavaş Kayar)
+        // Arka plan Parallax DaÄŸlar/YanardaÄŸlar (Ã‡ok YavaÅŸ Kayar)
         const mountGfx = this.make.graphics({ x:0, y:0, add:false });
         mountGfx.fillStyle(0x3B1F2B, 1);
         mountGfx.beginPath();
         mountGfx.moveTo(0, 256);
         mountGfx.lineTo(100, 50); // Zirve 1
         mountGfx.lineTo(250, 256);
-        mountGfx.lineTo(350, 120); // Zirve 2 (Yanardağ ağzı)
+        mountGfx.lineTo(350, 120); // Zirve 2 (YanardaÄŸ aÄŸzÄ±)
         mountGfx.lineTo(400, 120);
         mountGfx.lineTo(512, 256);
         mountGfx.fillPath();
 
-        // Yanardağ Lav detayı
+        // YanardaÄŸ Lav detayÄ±
         mountGfx.fillStyle(0xFF3300, 1);
         mountGfx.fillRect(350, 120, 50, 15);
         
         mountGfx.generateTexture('mountains', 512, 256);
         this.mountains = this.add.tileSprite(0, this.height - 250, this.width, 256, 'mountains').setOrigin(0);
 
-        // Ön plan Parallax Zemin (Ağaç Gölgeleri)
+        // Ã–n plan Parallax Zemin (AÄŸaÃ§ GÃ¶lgeleri)
         const groundGfx = this.make.graphics({ x:0, y:0, add:false });
         groundGfx.fillStyle(0x1B0B11, 1);
         groundGfx.beginPath();
         groundGfx.moveTo(0, 128);
         for (let i = 0; i < 512; i+=30) {
-            groundGfx.lineTo(i, Phaser.Math.Between(20, 60)); // Ağaç silüetleri
+            groundGfx.lineTo(i, Phaser.Math.Between(20, 60)); // AÄŸaÃ§ silÃ¼etleri
             groundGfx.lineTo(i+15, 128);
         }
         groundGfx.fillPath();
@@ -151,7 +151,7 @@ export default class SkyTraveler extends Phaser.Scene {
     }
 
     buildParticles() {
-        // Gazoz Köpüğü (Açık Mavi/Beyaz Baloncuklar)
+        // Gazoz KÃ¶pÃ¼ÄŸÃ¼ (AÃ§Ä±k Mavi/Beyaz Baloncuklar)
         const bubbleGfx = this.make.graphics({ x:0, y:0, add:false });
         bubbleGfx.fillStyle(0xCCFFFF, 1);
         bubbleGfx.fillCircle(8, 8, 8);
@@ -162,16 +162,16 @@ export default class SkyTraveler extends Phaser.Scene {
             scale: { start: 0.8, end: 0 },
             alpha: { start: 0.8, end: 0 },
             lifespan: 800,
-            angle: { min: 70, max: 110 }, // Aşağı doğru fışkırma
-            gravityY: -50, // Balonlar yukarı çıkar
+            angle: { min: 70, max: 110 }, // AÅŸaÄŸÄ± doÄŸru fÄ±ÅŸkÄ±rma
+            gravityY: -50, // Balonlar yukarÄ± Ã§Ä±kar
             tint: [0xCCFFFF, 0x00A8E8, 0xFFFFFF],
             emitting: false
         });
 
-        // Çarpışma: Yıldızlar ve Dino yaprakları (fillStar geçersiz, elle basit bir yıldız/çapraz çiziyoruz)
+        // Ã‡arpÄ±ÅŸma: YÄ±ldÄ±zlar ve Dino yapraklarÄ± (fillStar geÃ§ersiz, elle basit bir yÄ±ldÄ±z/Ã§apraz Ã§iziyoruz)
         const starGfx = this.make.graphics({ x:0, y:0, add:false });
         starGfx.fillStyle(0xFFD166, 1);
-        // Basit bir çapraz / patlama yıldızı
+        // Basit bir Ã§apraz / patlama yÄ±ldÄ±zÄ±
         starGfx.fillRect(8, 2, 4, 16);
         starGfx.fillRect(2, 8, 16, 4);
         starGfx.generateTexture('crash-star', 20, 20);
@@ -193,16 +193,16 @@ export default class SkyTraveler extends Phaser.Scene {
         overlay.fillStyle(0x000000, 0.6);
         overlay.fillRect(0, 0, this.width, this.height);
 
-        const title = this.add.text(this.width/2, this.height/2 - 60, 'DİNO GAZOZ UÇUŞU', {
+        const title = this.add.text(this.width/2, this.height/2 - 60, 'DÄ°NO GAZOZ UÃ‡UÅU', {
             fontSize: '76px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: '900',
             shadow: { offsetX: 5, offsetY: 5, color: '#000', blur: 12, fill: true }
         }).setOrigin(0.5);
 
-        const sub = this.add.text(this.width/2, this.height/2 + 45, 'Gazozları patlatıp zıplamak için TIKLA veya BOŞLUK tuşuna bas\n(Sağ/Sol oklarla havada yön verebilirsin)', {
+        const sub = this.add.text(this.width/2, this.height/2 + 45, 'GazozlarÄ± patlatÄ±p zÄ±plamak iÃ§in TIKLA veya BOÅLUK tuÅŸuna bas\n(SaÄŸ/Sol oklarla havada yÃ¶n verebilirsin)', {
             fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', align: 'center', lineHeight: 1.5
         }).setOrigin(0.5);
 
-        // Nabız animasyonu
+        // NabÄ±z animasyonu
         this.tweens.add({ targets: sub, alpha: 0.3, duration: 800, yoyo: true, repeat: -1 });
 
         this.uiContainer.add([overlay, title, sub]);
@@ -226,7 +226,7 @@ export default class SkyTraveler extends Phaser.Scene {
         this.birdContainer.body.enable = true;
         this.birdContainer.setPosition(250, this.height / 2);
         
-        // Engel döngüsü (Zamanlayıcı)
+        // Engel dÃ¶ngÃ¼sÃ¼ (ZamanlayÄ±cÄ±)
         const obsDelay = 1800; // Biraz daha tempolu
         this.obstacleTimer = this.time.addEvent({
             delay: obsDelay,
@@ -235,7 +235,7 @@ export default class SkyTraveler extends Phaser.Scene {
             loop: true
         });
 
-        // İlk zıplama motoru çalıştırır
+        // Ä°lk zÄ±plama motoru Ã§alÄ±ÅŸtÄ±rÄ±r
         this.jump();
     }
 
@@ -244,7 +244,7 @@ export default class SkyTraveler extends Phaser.Scene {
         
         this.birdContainer.body.setVelocityY(-550);
         
-        // Şahlanma rotasyon efekti
+        // Åahlanma rotasyon efekti
         this.tweens.killTweensOf(this.birdVisual);
         this.birdVisual.rotation = -0.3;
         this.tweens.add({
@@ -254,21 +254,21 @@ export default class SkyTraveler extends Phaser.Scene {
             ease: 'Sine.easeOut'
         });
 
-        // Gazoz köpüğü fışkırması (Jetpack pompasından)
+        // Gazoz kÃ¶pÃ¼ÄŸÃ¼ fÄ±ÅŸkÄ±rmasÄ± (Jetpack pompasÄ±ndan)
         this.jumpPuff.emitParticleAt(this.birdContainer.x - 30, this.birdContainer.y + 10, 6);
     }
 
     spawnObstacle() {
         if (this.state !== 'playing') return;
 
-        const gap = Phaser.Math.Between(220, 250); // Boşluğu garanti geçiş için ferahlattım
+        const gap = Phaser.Math.Between(220, 250); // BoÅŸluÄŸu garanti geÃ§iÅŸ iÃ§in ferahlattÄ±m
         const minHeight = 80;
         const maxTopHeight = this.height - gap - minHeight;
         const topHeight = Phaser.Math.Between(minHeight, maxTopHeight);
         
         const obsW = 85;
 
-        // Üst Sarmaşık (Doğrudan Rectangle - Çarpışma Sorunu 0)
+        // Ãœst SarmaÅŸÄ±k (DoÄŸrudan Rectangle - Ã‡arpÄ±ÅŸma Sorunu 0)
         const topBody = this.add.rectangle(this.width + 100, 0, obsW, topHeight, 0x145c22).setOrigin(0);
         topBody.setStrokeStyle(6, 0x2d8a40, 1);
         this.physics.add.existing(topBody);
@@ -276,7 +276,7 @@ export default class SkyTraveler extends Phaser.Scene {
         topBody.body.setVelocityX(-this.currentSpeed);
         this.obstacles.add(topBody);
 
-        // Alt Sarmaşık
+        // Alt SarmaÅŸÄ±k
         const bottomY = topHeight + gap;
         const bottomH = this.height - bottomY;
         const botBody = this.add.rectangle(this.width + 100, bottomY, obsW, bottomH, 0x145c22).setOrigin(0);
@@ -286,7 +286,7 @@ export default class SkyTraveler extends Phaser.Scene {
         botBody.body.setVelocityX(-this.currentSpeed);
         this.obstacles.add(botBody);
 
-        // Skor sensörü (Görünmez ince Rectangle)
+        // Skor sensÃ¶rÃ¼ (GÃ¶rÃ¼nmez ince Rectangle)
         const sensor = this.add.rectangle(this.width + 100 + obsW/2, 0, 20, this.height, 0xff0000, 0).setOrigin(0);
         this.physics.add.existing(sensor);
         sensor.body.setAllowGravity(false);
@@ -298,18 +298,18 @@ export default class SkyTraveler extends Phaser.Scene {
     update() {
         if (this.state === 'gameover') return;
 
-        // Arka plan Parallax Kaydırma (Hız hissi)
+        // Arka plan Parallax KaydÄ±rma (HÄ±z hissi)
         if (this.mountains) this.mountains.tilePositionX += (this.currentSpeed / 250);
         if (this.jungle)    this.jungle.tilePositionX    += (this.currentSpeed / 80);
 
         if (this.state !== 'playing') return;
 
-        // Ağır çekim (Düşerken ağzını açıp kafa üstü düşme hissi)
+        // AÄŸÄ±r Ã§ekim (DÃ¼ÅŸerken aÄŸzÄ±nÄ± aÃ§Ä±p kafa Ã¼stÃ¼ dÃ¼ÅŸme hissi)
         if (this.birdContainer.body.velocity.y > 250) {
             this.birdVisual.rotation = Phaser.Math.Linear(this.birdVisual.rotation, 0.4, 0.1);
         }
 
-        // Sol/Sağ Manevra (Hava sürtünmesi çok)
+        // Sol/SaÄŸ Manevra (Hava sÃ¼rtÃ¼nmesi Ã§ok)
         if (this.cursors.left.isDown) {
             this.birdContainer.body.setVelocityX(-300);
         } else if (this.cursors.right.isDown) {
@@ -318,27 +318,27 @@ export default class SkyTraveler extends Phaser.Scene {
             this.birdContainer.body.setVelocityX(this.birdContainer.body.velocity.x * 0.9);
         }
 
-        // Sınırlar
+        // SÄ±nÄ±rlar
         if (this.birdContainer.x < 30) this.birdContainer.x = 30;
-        // Engelleri ekran dışından getirmeden önce geçebilsin diye sağa fazla açılabilir
+        // Engelleri ekran dÄ±ÅŸÄ±ndan getirmeden Ã¶nce geÃ§ebilsin diye saÄŸa fazla aÃ§Ä±labilir
         if (this.birdContainer.x > this.width - 30) this.birdContainer.x = this.width - 30;
 
-        // Çarpışma Kontrolü (Dino vs Sarmaşıklar)
+        // Ã‡arpÄ±ÅŸma KontrolÃ¼ (Dino vs SarmaÅŸÄ±klar)
         this.physics.overlap(this.birdContainer, this.obstacles, () => {
             if (this.state === 'playing') this.triggerGameOver();
         });
 
-        // Yere veya çok yukarı değme
+        // Yere veya Ã§ok yukarÄ± deÄŸme
         if (this.birdContainer.y > this.height || this.birdContainer.y < -30) {
             this.triggerGameOver();
         }
 
-        // Akıllı Skor Tespiti
+        // AkÄ±llÄ± Skor Tespiti
         this.scoreSensors.getChildren().forEach(sensor => {
             if (!sensor.passed && this.birdContainer.x > sensor.x) {
                 sensor.passed = true;
                 this.score++;
-                this.scoreTxt.setText(`🍾 Skor: ${this.score}`);
+                this.scoreTxt.setText(`ğŸ¾ Skor: ${this.score}`);
                 
                 // +1 Pop-up (Gazoz renginde)
                 const pt = this.add.text(this.birdContainer.x, this.birdContainer.y - 50, '+1', {
@@ -347,15 +347,15 @@ export default class SkyTraveler extends Phaser.Scene {
                 }).setOrigin(0.5);
                 this.tweens.add({ targets: pt, y: pt.y - 100, scale: 1.5, alpha: 0, duration: 800, onComplete: () => pt.destroy() });
 
-                // Tempolu zorluk artışı
+                // Tempolu zorluk artÄ±ÅŸÄ±
                 if (this.score % 5 === 0) {
                     this.currentSpeed += 25; 
-                    this.cameras.main.flash(150, 255, 200, 100, 0.2); // Altın sarısı speed-up flash
+                    this.cameras.main.flash(150, 255, 200, 100, 0.2); // AltÄ±n sarÄ±sÄ± speed-up flash
                 }
             }
         });
 
-        // Bellek Temizliği (Geride kalanları yok et)
+        // Bellek TemizliÄŸi (Geride kalanlarÄ± yok et)
         this.obstacles.getChildren().forEach(obs => {
             if (obs.x < -200) obs.destroy();
         });
@@ -371,20 +371,20 @@ export default class SkyTraveler extends Phaser.Scene {
         this.physics.pause();
         if (this.obstacleTimer) this.obstacleTimer.remove();
 
-        // Şiddetli Kamera Sarsıntısı
+        // Åiddetli Kamera SarsÄ±ntÄ±sÄ±
         this.cameras.main.shake(500, 0.025);
         this.cameras.main.flash(300, 255, 0, 0, 0.4);
 
-        // Dinozor Çarpışma Yıldızları
+        // Dinozor Ã‡arpÄ±ÅŸma YÄ±ldÄ±zlarÄ±
         this.crashBurst.emitParticleAt(this.birdContainer.x, this.birdContainer.y, 40);
         this.birdContainer.setVisible(false);
 
-        // Skor Kaydı
+        // Skor KaydÄ±
         const engine = window.gameEngine || this.game.gameEngine;
         let newRecord = false;
         if (engine) newRecord = engine.saveScore('sky-traveler', this.score);
 
-        // Sinematik Game Over Menüsü
+        // Sinematik Game Over MenÃ¼sÃ¼
         this.time.delayedCall(1000, () => {
             const ov = this.add.graphics();
             ov.fillStyle(0x000000, 0.85);
@@ -393,10 +393,10 @@ export default class SkyTraveler extends Phaser.Scene {
             const panel = this.add.graphics();
             panel.fillStyle(0x2D1B69, 1); // Koyu Lacivert Arka
             panel.fillRoundedRect(this.width/2 - 300, this.height/2 - 200, 600, 400, 32);
-            panel.lineStyle(6, 0x06D6A0, 1); // Parlak Yeşil Çerçeve
+            panel.lineStyle(6, 0x06D6A0, 1); // Parlak YeÅŸil Ã‡erÃ§eve
             panel.strokeRoundedRect(this.width/2 - 300, this.height/2 - 200, 600, 400, 32);
 
-            this.add.text(this.width/2, this.height/2 - 120, '💥 ÇAKILDIN! 💥', {
+            this.add.text(this.width/2, this.height/2 - 120, 'ğŸ’¥ Ã‡AKILDIN! ğŸ’¥', {
                 fontSize: '64px', fill: '#EF476F', fontFamily: 'Nunito', fontWeight: '900',
                 shadow: { offsetX: 3, offsetY: 3, color: '#000', blur: 5, fill: true }
             }).setOrigin(0.5);
@@ -406,13 +406,13 @@ export default class SkyTraveler extends Phaser.Scene {
             }).setOrigin(0.5);
 
             if (newRecord) {
-                const rt = this.add.text(this.width/2, this.height/2 + 70, '🌟 YENİ DİNO REKORU! 🌟', {
+                const rt = this.add.text(this.width/2, this.height/2 + 70, 'ğŸŒŸ YENÄ° DÄ°NO REKORU! ğŸŒŸ', {
                     fontSize: '32px', fill: '#00A8E8', fontFamily: 'Nunito', fontWeight: '900'
                 }).setOrigin(0.5);
                 this.tweens.add({ targets: rt, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
             }
 
-            const rst = this.add.text(this.width/2, this.height/2 + 150, 'Yeniden uçmak için tıkla 👉', {
+            const rst = this.add.text(this.width/2, this.height/2 + 150, 'Yeniden uÃ§mak iÃ§in tÄ±kla ğŸ‘‰', {
                 fontSize: '28px', fill: '#FFF', fontFamily: 'Nunito'
             }).setOrigin(0.5);
             this.tweens.add({ targets: rst, alpha: 0.5, duration: 600, yoyo: true, repeat: -1 });

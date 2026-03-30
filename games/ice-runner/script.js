@@ -1,8 +1,8 @@
-/**
+﻿/**
  * GNNgame: Ice Runner - ULTIMATE Juicy Version
- * Özellikler: Aurora Borealis Gökyüzü, Procedural Buz Dağları,
- *             Yoğun Kar Fırtınası, Çift Zıplama, Dinamik Sivri Engeller,
- *             Kamera Sarsıntıları ve Patlamalar, Neon Panolar
+ * Ã–zellikler: Aurora Borealis GÃ¶kyÃ¼zÃ¼, Procedural Buz DaÄŸlarÄ±,
+ *             YoÄŸun Kar FÄ±rtÄ±nasÄ±, Ã‡ift ZÄ±plama, Dinamik Sivri Engeller,
+ *             Kamera SarsÄ±ntÄ±larÄ± ve Patlamalar, Neon Panolar
  */
 export default class IceRunner extends Phaser.Scene {
     constructor() {
@@ -23,22 +23,22 @@ export default class IceRunner extends Phaser.Scene {
     }
 
     preload() {
-        // Görseller procedural (kodla) çizilecek
+        // GÃ¶rseller procedural (kodla) Ã§izilecek
     }
 
     create() {
-        // ── DOKU OLUŞTURMA ──
+        // â”€â”€ DOKU OLUÅTURMA â”€â”€
         this.buildTextures();
 
-        // ── ARKA PLAN ──
+        // â”€â”€ ARKA PLAN â”€â”€
         this.buildParallax();
 
-        // ── ENGELLER ──
+        // â”€â”€ ENGELLER â”€â”€
         this.obstacles = this.add.group();
         this.scoreSensors = this.add.group();
 
-        // ── KARAKTER (Penguen) ──
-        this.penguin = this.add.text(200, this.height - this.groundHeight - 50, '🐧', { fontSize: '64px' }).setOrigin(0.5);
+        // â”€â”€ KARAKTER (Penguen) â”€â”€
+        this.penguin = this.add.text(200, this.height - this.groundHeight - 50, 'ğŸ§', { fontSize: '64px' }).setOrigin(0.5);
         this.physics.add.existing(this.penguin);
         this.penguin.body.setGravityY(1600);
         this.penguin.body.setCollideWorldBounds(true);
@@ -46,29 +46,29 @@ export default class IceRunner extends Phaser.Scene {
         this.penguin.body.setSize(40, 50);
         this.penguin.body.setOffset(12, 10);
 
-        // ── PARTİKÜLLER ──
+        // â”€â”€ PARTÄ°KÃœLLER â”€â”€
         this.buildParticles();
 
-        // ── UI (Panolar) ──
+        // â”€â”€ UI (Panolar) â”€â”€
         this.buildUI();
 
-        // ── ÇARPIŞMALAR ──
+        // â”€â”€ Ã‡ARPIÅMALAR â”€â”€
         this.physics.add.collider(this.penguin, this.ground, () => {
             if (this.penguin.body.touching.down) {
                 this.jumps = 0;
             }
         });
         
-        // overlap kullanıyoruz ki fiziksel sekme olmasın, anında game over tetiklensin
+        // overlap kullanÄ±yoruz ki fiziksel sekme olmasÄ±n, anÄ±nda game over tetiklensin
         this.physics.add.overlap(this.penguin, this.obstacles, () => this.triggerGameOver());
 
-        // ── KONTROLLER ──
+        // â”€â”€ KONTROLLER â”€â”€
         this.input.on('pointerdown', () => this.jump());
         this.input.keyboard.on('keydown-SPACE', () => this.jump());
         this.input.keyboard.on('keydown-UP', () => this.jump());
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Başlangıç ekranı
+        // BaÅŸlangÄ±Ã§ ekranÄ±
         this.physics.pause();
         this.showStartScreen();
     }
@@ -79,7 +79,7 @@ export default class IceRunner extends Phaser.Scene {
         gGfx.fillStyle(0x0a2342, 1);
         gGfx.fillRect(0,0, 128, this.groundHeight);
         gGfx.fillStyle(0x4cc9f0, 0.4);
-        gGfx.fillRect(0,0, 128, 6); // Üstteki buz parlaması
+        gGfx.fillRect(0,0, 128, 6); // Ãœstteki buz parlamasÄ±
         gGfx.generateTexture('ice-ground', 128, this.groundHeight);
 
         // Sivri Buz Engeli (Ice Spike)
@@ -90,19 +90,19 @@ export default class IceRunner extends Phaser.Scene {
         obsGfx.lineTo(0, 90);
         obsGfx.lineTo(70, 90);
         obsGfx.fillPath();
-        // Neon Aurora Çizgileri
+        // Neon Aurora Ã‡izgileri
         obsGfx.lineStyle(4, 0x06D6A0, 1);
         obsGfx.strokePath();
-        // İç enerji
+        // Ä°Ã§ enerji
         obsGfx.fillStyle(0x06D6A0, 0.5);
         obsGfx.beginPath(); obsGfx.moveTo(35, 25); obsGfx.lineTo(15, 90); obsGfx.lineTo(55, 90); obsGfx.fillPath();
         obsGfx.generateTexture('ice-spike', 70, 90);
         
-        // Arka Dağlar (Koyu Silüet)
+        // Arka DaÄŸlar (Koyu SilÃ¼et)
         const mGfx = this.make.graphics({x:0, y:0, add:false});
         mGfx.fillStyle(0x0f2a40, 1);
         mGfx.beginPath(); mGfx.moveTo(150, 0); mGfx.lineTo(0, 250); mGfx.lineTo(300, 250); mGfx.fillPath();
-        mGfx.fillStyle(0x1a4563, 1); // Arkadaki 2. dağ
+        mGfx.fillStyle(0x1a4563, 1); // Arkadaki 2. daÄŸ
         mGfx.beginPath(); mGfx.moveTo(70, 80); mGfx.lineTo(0, 250); mGfx.lineTo(180, 250); mGfx.fillPath();
         mGfx.generateTexture('ice-mountains', 300, 250);
 
@@ -114,35 +114,35 @@ export default class IceRunner extends Phaser.Scene {
     }
 
     buildParallax() {
-        // Gökyüzü (Aurora Borealis)
+        // GÃ¶kyÃ¼zÃ¼ (Aurora Borealis)
         const bg = this.add.graphics();
         bg.fillGradientStyle(0x011627, 0x011627, 0x118ab2, 0x06D6A0, 1);
         bg.fillRect(0,0, this.width, this.height);
 
-        // Dağlar
+        // DaÄŸlar
         this.mountains = this.add.tileSprite(0, this.height - this.groundHeight - 240, this.width, 250, 'ice-mountains').setOrigin(0).setAlpha(0.85);
 
         // Zemin
         this.ground = this.add.tileSprite(0, this.height - this.groundHeight, this.width, this.groundHeight, 'ice-ground').setOrigin(0);
         this.physics.add.existing(this.ground, true); 
-        this.ground.body.updateFromGameObject(); // TileSprite fizik güncellemesi
+        this.ground.body.updateFromGameObject(); // TileSprite fizik gÃ¼ncellemesi
     }
 
     buildParticles() {
-        // Yoğun Kar Fırtınası
+        // YoÄŸun Kar FÄ±rtÄ±nasÄ±
         this.snowStorm = this.add.particles(0, 0, 'flake', {
             x: { min: 0, max: this.width + 200 },
             y: -20,
             lifespan: 5000,
             speedY: { min: 100, max: 250 },
-            speedX: { min: -200, max: -80 }, // Fırtına sola esiyor
+            speedX: { min: -200, max: -80 }, // FÄ±rtÄ±na sola esiyor
             scale: { start: 0.8, end: 1.5 },
             alpha: { start: 0.8, end: 0 },
             quantity: 3,
             frequency: 30
         }).setDepth(10);
 
-        // Çift Zıplama Kar Patlaması
+        // Ã‡ift ZÄ±plama Kar PatlamasÄ±
         this.jumpBurst = this.add.particles(0, 0, 'flake', {
             speed: { min: 100, max: 400 },
             scale: { start: 1.5, end: 0 },
@@ -152,7 +152,7 @@ export default class IceRunner extends Phaser.Scene {
             emitting: false
         }).setDepth(5);
 
-        // Çarpışma Şoku
+        // Ã‡arpÄ±ÅŸma Åoku
         this.crashBurst = this.add.particles(0, 0, 'flake', {
             speed: { min: 300, max: 700 },
             scale: { start: 2, end: 0 },
@@ -171,7 +171,7 @@ export default class IceRunner extends Phaser.Scene {
         scoreBg.lineStyle(4, 0x4cc9f0, 1);
         scoreBg.strokeRoundedRect(0, 0, 230, 60, 16);
 
-        this.scoreText = this.add.text(145, 55, '⭐ Skor: 0', {
+        this.scoreText = this.add.text(145, 55, 'â­ Skor: 0', {
             fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
 
@@ -185,7 +185,7 @@ export default class IceRunner extends Phaser.Scene {
             recBg.lineStyle(4, 0xFFD166, 1);
             recBg.strokeRoundedRect(0, 0, 230, 60, 16);
 
-            this.add.text(this.width - 145, 55, `🏆 Rekor: ${highScore}`, {
+            this.add.text(this.width - 145, 55, `ğŸ† Rekor: ${highScore}`, {
                 fontSize: '26px', fill: '#FFD166', fontFamily: 'Nunito', fontWeight: '900'
             }).setOrigin(0.5).setDepth(100);
         }
@@ -196,12 +196,12 @@ export default class IceRunner extends Phaser.Scene {
         this.overlay.fillStyle(0x000000, 0.65);
         this.overlay.fillRect(0, 0, this.width, this.height);
 
-        this.titleTxt = this.add.text(this.width/2, this.height/2 - 50, 'BUZUL KOŞUSU', {
+        this.titleTxt = this.add.text(this.width/2, this.height/2 - 50, 'BUZUL KOÅUSU', {
             fontSize: '76px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: '900',
             shadow: { offsetX: 4, offsetY: 4, color: '#000', blur: 10, fill: true }
         }).setOrigin(0.5).setDepth(200);
 
-        this.subTxt = this.add.text(this.width/2, this.height/2 + 50, 'Zıplamak için Tıkla (Çift Zıplama Var!)\nPenguen fırtınaya karşı koşuyor 🐧', {
+        this.subTxt = this.add.text(this.width/2, this.height/2 + 50, 'ZÄ±plamak iÃ§in TÄ±kla (Ã‡ift ZÄ±plama Var!)\nPenguen fÄ±rtÄ±naya karÅŸÄ± koÅŸuyor ğŸ§', {
             fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', align: 'center', lineHeight: 1.5
         }).setOrigin(0.5).setDepth(200);
 
@@ -219,7 +219,7 @@ export default class IceRunner extends Phaser.Scene {
         if (this.subTxt) this.subTxt.destroy();
         
         this.physics.resume();
-        this.penguin.body.setVelocityY(-400); // İlk fırlatma hissi
+        this.penguin.body.setVelocityY(-400); // Ä°lk fÄ±rlatma hissi
 
         this.spawnTimer = this.time.addEvent({
             delay: 1400,
@@ -237,13 +237,13 @@ export default class IceRunner extends Phaser.Scene {
             this.jumps++;
             
             if (this.jumps === 2) {
-                // Çift Zıplama: Kar Tanesi Patlaması ve Dönüş
+                // Ã‡ift ZÄ±plama: Kar Tanesi PatlamasÄ± ve DÃ¶nÃ¼ÅŸ
                 this.jumpBurst.emitParticleAt(this.penguin.x, this.penguin.y + 20, 20);
                 this.tweens.killTweensOf(this.penguin);
                 this.penguin.setAngle(0);
                 this.tweens.add({ targets: this.penguin, angle: 360, duration: 450, ease: 'Cubic.easeOut', onComplete: () => this.penguin.setAngle(0) });
             } else {
-                // Tek Zıplama
+                // Tek ZÄ±plama
                 this.jumpBurst.emitParticleAt(this.penguin.x, this.penguin.y + 20, 8);
                 this.tweens.killTweensOf(this.penguin);
                 this.penguin.setAngle(0);
@@ -256,7 +256,7 @@ export default class IceRunner extends Phaser.Scene {
         if (this.state !== 'playing') return;
 
         const isAir = Phaser.Math.Between(0, 100) > 85; 
-        const isDouble = Phaser.Math.Between(0, 100) > 75; // Yanyana iki engel şansı
+        const isDouble = Phaser.Math.Between(0, 100) > 75; // Yanyana iki engel ÅŸansÄ±
 
         this.createIceSpike(this.width + 100, isAir);
         
@@ -268,26 +268,26 @@ export default class IceRunner extends Phaser.Scene {
     createIceSpike(x, isAir) {
         const y = isAir ? this.height - this.groundHeight - 120 : this.height - this.groundHeight - 45;
 
-        // Spritelar origin 0.5 olduğu için 90 yüksekliğin yarısı yukarda duracak
+        // Spritelar origin 0.5 olduÄŸu iÃ§in 90 yÃ¼ksekliÄŸin yarÄ±sÄ± yukarda duracak
         const obs = this.add.sprite(x, y, 'ice-spike');
         this.physics.add.existing(obs);
         obs.body.setAllowGravity(false);
         obs.body.setVelocityX(-this.currentSpeed);
         
-        // Çarpışma alanını insaflı yap (Görsel 70x90)
+        // Ã‡arpÄ±ÅŸma alanÄ±nÄ± insaflÄ± yap (GÃ¶rsel 70x90)
         obs.body.setSize(35, 75);
         obs.body.setOffset(17, 10);
         
         this.obstacles.add(obs);
 
-        // Uçan engeller biraz dalgalansın
+        // UÃ§an engeller biraz dalgalansÄ±n
         if (isAir) {
             this.tweens.add({
                 targets: obs, y: obs.y - 30, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
             });
         }
 
-        // Skor Sensörü
+        // Skor SensÃ¶rÃ¼
         const sensor = this.add.rectangle(obs.x + 20, 0, 10, this.height, 0xff0000, 0).setOrigin(0);
         this.physics.add.existing(sensor);
         sensor.body.setAllowGravity(false);
@@ -299,28 +299,28 @@ export default class IceRunner extends Phaser.Scene {
     update(time, delta) {
         if (this.state !== 'playing') return;
 
-        // Parallax Kaydırma
+        // Parallax KaydÄ±rma
         this.mountains.tilePositionX += (this.currentSpeed / 250);
         this.ground.tilePositionX += (this.currentSpeed / 80);
 
-        // Havadayken yavaşça düzeltme ve düşüş hissi
+        // Havadayken yavaÅŸÃ§a dÃ¼zeltme ve dÃ¼ÅŸÃ¼ÅŸ hissi
         if (this.penguin.body.velocity.y > 100 && this.jumps === 1) {
             this.penguin.rotation = Phaser.Math.Linear(this.penguin.rotation, 0.2, 0.1);
         }
 
-        // Sola Sağ Oklarla hafif manevra
+        // Sola SaÄŸ Oklarla hafif manevra
         if (this.cursors.left.isDown) {
             this.penguin.x = Math.max(50, this.penguin.x - 4);
         } else if (this.cursors.right.isDown) {
             this.penguin.x = Math.min(this.width/2, this.penguin.x + 4);
         }
 
-        // Skor Kontrolü (Sensörler)
+        // Skor KontrolÃ¼ (SensÃ¶rler)
         this.scoreSensors.getChildren().forEach(sen => {
             if (!sen.passed && this.penguin.x > sen.x) {
                 sen.passed = true;
                 this.score++;
-                this.scoreText.setText(`⭐ Skor: ${this.score}`);
+                this.scoreText.setText(`â­ Skor: ${this.score}`);
                 
                 const pt = this.add.text(this.penguin.x, this.penguin.y - 50, '+1', {
                     fontSize: '44px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: '900',
@@ -340,7 +340,7 @@ export default class IceRunner extends Phaser.Scene {
             if (sen.x < -100) sen.destroy();
         });
 
-        // Çıkan Engelleri Yok Et
+        // Ã‡Ä±kan Engelleri Yok Et
         this.obstacles.getChildren().forEach(obs => {
             if (obs.x < -100) obs.destroy();
         });
@@ -374,7 +374,7 @@ export default class IceRunner extends Phaser.Scene {
             panel.lineStyle(6, 0xEF476F, 1); 
             panel.strokeRoundedRect(this.width/2 - 300, this.height/2 - 200, 600, 400, 32);
 
-            this.add.text(this.width/2, this.height/2 - 120, '💥 DONDUN KALDIN! 💥', {
+            this.add.text(this.width/2, this.height/2 - 120, 'ğŸ’¥ DONDUN KALDIN! ğŸ’¥', {
                 fontSize: '56px', fill: '#EF476F', fontFamily: 'Nunito', fontWeight: '900',
                 shadow: { offsetX: 3, offsetY: 3, color: '#000', blur: 5, fill: true }
             }).setOrigin(0.5).setDepth(200);
@@ -384,13 +384,13 @@ export default class IceRunner extends Phaser.Scene {
             }).setOrigin(0.5).setDepth(200);
 
             if (newRecord) {
-                const rt = this.add.text(this.width/2, this.height/2 + 70, '🌟 YENİ REKOR! 🌟', {
+                const rt = this.add.text(this.width/2, this.height/2 + 70, 'ğŸŒŸ YENÄ° REKOR! ğŸŒŸ', {
                     fontSize: '32px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: '900'
                 }).setOrigin(0.5).setDepth(200);
                 this.tweens.add({ targets: rt, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
             }
 
-            const rst = this.add.text(this.width/2, this.height/2 + 150, 'Yeniden koşmak için tıkla 👉', {
+            const rst = this.add.text(this.width/2, this.height/2 + 150, 'Yeniden koÅŸmak iÃ§in tÄ±kla ğŸ‘‰', {
                 fontSize: '28px', fill: '#FFF', fontFamily: 'Nunito'
             }).setOrigin(0.5).setDepth(200);
             this.tweens.add({ targets: rst, alpha: 0.5, duration: 600, yoyo: true, repeat: -1 });

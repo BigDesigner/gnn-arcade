@@ -1,7 +1,7 @@
-/**
+﻿/**
  * GNNgame: Memory Match - ULTIMATE Phaser Version
- * Uzay Teması | Level Sistemi | 3D Flip | Parçacık Efektleri
- * Dairesel Timer | Hamle Sayacı | 3 Yıldız Derecelendirmesi
+ * Uzay TemasÄ± | Level Sistemi | 3D Flip | ParÃ§acÄ±k Efektleri
+ * Dairesel Timer | Hamle SayacÄ± | 3 YÄ±ldÄ±z Derecelendirmesi
  */
 export default class MemoryMatch extends Phaser.Scene {
     constructor() {
@@ -25,21 +25,21 @@ export default class MemoryMatch extends Phaser.Scene {
         this.timerEvt    = null;
     }
 
-    // ── Seviye Tanımları
+    // â”€â”€ Seviye TanÄ±mlarÄ±
     getLevelConfig(diff) {
         return {
-            easy:   { cols:4, rows:3, time:60, pairStars:[6,9,14],  label:'🌟 KOLAY',  color:0x06D6A0 },
-            medium: { cols:4, rows:4, time:50, pairStars:[10,13,18], label:'⚡ ORTA',   color:0xFFD166 },
-            hard:   { cols:5, rows:4, time:45, pairStars:[12,16,22], label:'🔥 ZOR',    color:0xf72585 }
+            easy:   { cols:4, rows:3, time:60, pairStars:[6,9,14],  label:'ğŸŒŸ KOLAY',  color:0x06D6A0 },
+            medium: { cols:4, rows:4, time:50, pairStars:[10,13,18], label:'âš¡ ORTA',   color:0xFFD166 },
+            hard:   { cols:5, rows:4, time:45, pairStars:[12,16,22], label:'ğŸ”¥ ZOR',    color:0xf72585 }
         }[diff];
     }
 
-    // ── Emoji havuzu — Orman & Doğa teması
+    // â”€â”€ Emoji havuzu â€” Orman & DoÄŸa temasÄ±
     getEmojis() {
-        return ['🦊','🐸','🪲','🦋','🌻','🐝','🌸','🐇','🦔','🌿'];
+        return ['ğŸ¦Š','ğŸ¸','ğŸª²','ğŸ¦‹','ğŸŒ»','ğŸ','ğŸŒ¸','ğŸ‡','ğŸ¦”','ğŸŒ¿'];
     }
 
-    // ─────────────── CREATE ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CREATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     create() {
         this.buildBg();
         this.buildParticles();
@@ -47,7 +47,7 @@ export default class MemoryMatch extends Phaser.Scene {
     }
 
     buildBg() {
-        // Renkli Orman Teması: Yeşil → Koyu Yeşil Gradyan
+        // Renkli Orman TemasÄ±: YeÅŸil â†’ Koyu YeÅŸil Gradyan
         const bg = this.add.graphics();
         bg.fillGradientStyle(0x1a6b2a, 0x1a6b2a, 0x0d3b16, 0x0d3b16, 1);
         bg.fillRect(0, 0, this.width, this.height);
@@ -63,13 +63,13 @@ export default class MemoryMatch extends Phaser.Scene {
             );
         }
 
-        // Üst ve alt dekoratif şeritler
+        // Ãœst ve alt dekoratif ÅŸeritler
         const topBar = this.add.graphics();
         topBar.fillStyle(0x0d3b16, 0.6);
         topBar.fillRect(0, 0, this.width, 8);
         topBar.fillRect(0, this.height - 8, this.width, 8);
 
-        // Renkli konfeti noktaları (statik dekor)
+        // Renkli konfeti noktalarÄ± (statik dekor)
         const confettiColors = [0xFFD166, 0xF72585, 0x4CC9F0, 0xFF6B35, 0x7B2FFF];
         for (let i = 0; i < 25; i++) {
             const dot = this.add.circle(
@@ -78,7 +78,7 @@ export default class MemoryMatch extends Phaser.Scene {
                 Phaser.Math.Between(3, 8),
                 Phaser.Utils.Array.GetRandom(confettiColors), 0.35
             );
-            // Yavaşça soluk soluk parılda
+            // YavaÅŸÃ§a soluk soluk parÄ±lda
             this.tweens.add({
                 targets: dot, alpha: { from: 0.1, to: 0.5 },
                 duration: Phaser.Math.Between(1000, 3000),
@@ -86,7 +86,7 @@ export default class MemoryMatch extends Phaser.Scene {
             });
         }
 
-        // Kayan dekor şeritler (yaprak efekti)
+        // Kayan dekor ÅŸeritler (yaprak efekti)
         const sg = this.make.graphics({ x:0, y:0, add:false });
         sg.fillStyle(0x4aba66, 0.3);
         for (let i = 0; i < 15; i++) {
@@ -118,30 +118,30 @@ export default class MemoryMatch extends Phaser.Scene {
         });
     }
 
-    // ─────────────── MENU ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MENU â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     showMenu() {
         this.clearUI();
         this.gameOver = false;
         this.score    = 0;
         this.moves    = 0;
 
-        const title = this.add.text(this.width/2, 110, '🧠 Hafıza Kartları', {
+        const title = this.add.text(this.width/2, 110, 'ğŸ§  HafÄ±za KartlarÄ±', {
             fontSize:'62px', fill:'#ffffff', fontFamily:'Nunito', fontWeight:'900',
             shadow:{ offsetX:3, offsetY:3, color:'#000', blur:12, fill:true }
         }).setOrigin(0.5);
         this.tweens.add({ targets:title, y:120, duration:1800, yoyo:true, repeat:-1, ease:'Sine.easeInOut' });
         this.uiObjs.push(title);
 
-        const sub = this.add.text(this.width/2, 188, 'Seviyeni seç ve kartları eşleştir!', {
+        const sub = this.add.text(this.width/2, 188, 'Seviyeni seÃ§ ve kartlarÄ± eÅŸleÅŸtir!', {
             fontSize:'26px', fill:'#a8f0c0', fontFamily:'Nunito'
         }).setOrigin(0.5);
         this.uiObjs.push(sub);
 
-        // 3 Zorluk Kartı YAN YANA
+        // 3 Zorluk KartÄ± YAN YANA
         const levels = [
-            { key:'easy',   emoji:'🌱', label:'Kolay',  desc:'4×3  ·  6 çift',  sub:'60 saniye',  color:0x06D6A0, dark:0x048a68 },
-            { key:'medium', emoji:'⚡', label:'Orta',   desc:'4×4  ·  8 çift',  sub:'50 saniye',  color:0xFFD166, dark:0xc9a200 },
-            { key:'hard',   emoji:'🔥', label:'Zor',    desc:'5×4  ·  10 çift', sub:'45 saniye',  color:0xf72585, dark:0xb3005e }
+            { key:'easy',   emoji:'ğŸŒ±', label:'Kolay',  desc:'4Ã—3  Â·  6 Ã§ift',  sub:'60 saniye',  color:0x06D6A0, dark:0x048a68 },
+            { key:'medium', emoji:'âš¡', label:'Orta',   desc:'4Ã—4  Â·  8 Ã§ift',  sub:'50 saniye',  color:0xFFD166, dark:0xc9a200 },
+            { key:'hard',   emoji:'ğŸ”¥', label:'Zor',    desc:'5Ã—4  Â·  10 Ã§ift', sub:'45 saniye',  color:0xf72585, dark:0xb3005e }
         ];
 
         const cardW = 260, cardH = 300, gap = 40;
@@ -154,7 +154,7 @@ export default class MemoryMatch extends Phaser.Scene {
             const card = this.add.container(x, baseY + 80).setAlpha(0);
             this.uiObjs.push(card);
 
-            // Kart arka yüzü (kapalı hali - soru işareti)
+            // Kart arka yÃ¼zÃ¼ (kapalÄ± hali - soru iÅŸareti)
             const back = this.add.graphics();
             back.fillStyle(lv.color, 1);
             back.fillRoundedRect(-cardW/2, -cardH/2, cardW, cardH, 22);
@@ -167,7 +167,7 @@ export default class MemoryMatch extends Phaser.Scene {
 
             const qsub = this.add.text(0, 65, lv.emoji, { fontSize:'48px' }).setOrigin(0.5);
 
-            // Kart ön yüzü (açık hali - hover'da görünür)
+            // Kart Ã¶n yÃ¼zÃ¼ (aÃ§Ä±k hali - hover'da gÃ¶rÃ¼nÃ¼r)
             const front = this.add.graphics();
             front.fillStyle(0xffffff, 1);
             front.fillRoundedRect(-cardW/2, -cardH/2, cardW, cardH, 22);
@@ -192,7 +192,7 @@ export default class MemoryMatch extends Phaser.Scene {
             fBtn.fillRoundedRect(-80, 72, 160, 50, 25);
             fBtn.setAlpha(0);
 
-            const fBtnTxt = this.add.text(0, 97, 'Başla!', {
+            const fBtnTxt = this.add.text(0, 97, 'BaÅŸla!', {
                 fontSize:'24px', fill:'#fff', fontFamily:'Nunito', fontWeight:'800'
             }).setOrigin(0.5).setAlpha(0);
 
@@ -201,11 +201,11 @@ export default class MemoryMatch extends Phaser.Scene {
             card.setInteractive({ useHandCursor:true });
 
             card.on('pointerover', () => {
-                // Anında içerik değişimi (animasyon yok → çakma riski sıfır)
+                // AnÄ±nda iÃ§erik deÄŸiÅŸimi (animasyon yok â†’ Ã§akma riski sÄ±fÄ±r)
                 back.setAlpha(0); qmark.setAlpha(0); qsub.setAlpha(0);
                 front.setAlpha(1); flbl.setAlpha(1); fdesc.setAlpha(1);
                 fsub.setAlpha(1); fBtn.setAlpha(1); fBtnTxt.setAlpha(1);
-                // Sadece hafif büyüme tweeni
+                // Sadece hafif bÃ¼yÃ¼me tweeni
                 this.tweens.killTweensOf(card);
                 this.tweens.add({ targets:card, scale:1.07, duration:150, ease:'Back.easeOut' });
             });
@@ -220,7 +220,7 @@ export default class MemoryMatch extends Phaser.Scene {
 
             card.on('pointerdown', () => this.startGame(lv.key));
 
-            // Giriş animasyonu
+            // GiriÅŸ animasyonu
             this.tweens.add({ targets:card, y:baseY, alpha:1, duration:400, delay:i*120, ease:'Back.easeOut' });
         });
     }
@@ -234,7 +234,7 @@ export default class MemoryMatch extends Phaser.Scene {
         if (this.timerGfx) { this.timerGfx.destroy(); this.timerGfx = null; }
     }
 
-    // ─────────────── GAME START ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ GAME START â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     startGame(diff) {
         this.difficulty  = diff;
         this.score       = 0;
@@ -251,7 +251,7 @@ export default class MemoryMatch extends Phaser.Scene {
 
         this.clearUI();
 
-        // ── Skor Panosu
+        // â”€â”€ Skor Panosu
         const scoreBg = this.add.graphics({ x: 30, y: 25 }).setDepth(99);
         scoreBg.fillStyle(0x0d3b16, 0.9);
         scoreBg.fillRoundedRect(0, 0, 220, 60, 16);
@@ -259,12 +259,12 @@ export default class MemoryMatch extends Phaser.Scene {
         scoreBg.strokeRoundedRect(0, 0, 220, 60, 16);
         this.uiObjs.push(scoreBg);
 
-        this.scoreTxt = this.add.text(140, 55, '⭐ Skor: 0', {
+        this.scoreTxt = this.add.text(140, 55, 'â­ Skor: 0', {
             fontSize: '28px', fill: '#FFD166', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
         this.uiObjs.push(this.scoreTxt);
 
-        // ── Hamle Panosu
+        // â”€â”€ Hamle Panosu
         const moveBg = this.add.graphics({ x: 30, y: 95 }).setDepth(99);
         moveBg.fillStyle(0x0d3b16, 0.9);
         moveBg.fillRoundedRect(0, 0, 220, 46, 16);
@@ -272,12 +272,12 @@ export default class MemoryMatch extends Phaser.Scene {
         moveBg.strokeRoundedRect(0, 0, 220, 46, 16);
         this.uiObjs.push(moveBg);
 
-        this.moveTxt = this.add.text(140, 118, '🔄 Hamle: 0', {
+        this.moveTxt = this.add.text(140, 118, 'ğŸ”„ Hamle: 0', {
             fontSize: '24px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
         this.uiObjs.push(this.moveTxt);
 
-        // ── Süre Barı (Modern Progress Bar - Top Center)
+        // â”€â”€ SÃ¼re BarÄ± (Modern Progress Bar - Top Center)
         const timerBg = this.add.graphics().setDepth(99);
         timerBg.fillStyle(0x0d3b16, 0.9);
         timerBg.fillRoundedRect(this.width/2 - 200, 25, 400, 46, 23);
@@ -288,12 +288,12 @@ export default class MemoryMatch extends Phaser.Scene {
         this.timerGfx = this.add.graphics().setDepth(100);
         this.uiObjs.push(this.timerGfx);
 
-        this.timerLabel = this.add.text(this.width/2, 48, '⏳ ' + cfg.time, {
+        this.timerLabel = this.add.text(this.width/2, 48, 'â³ ' + cfg.time, {
             fontSize: '24px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(101);
         this.uiObjs.push(this.timerLabel);
 
-        // ── Eşleşme Panosu (Sağ Üst)
+        // â”€â”€ EÅŸleÅŸme Panosu (SaÄŸ Ãœst)
         const pairBg = this.add.graphics({ x: this.width - 250, y: 25 }).setDepth(99);
         pairBg.fillStyle(0x0d3b16, 0.9);
         pairBg.fillRoundedRect(0, 0, 220, 60, 16);
@@ -301,7 +301,7 @@ export default class MemoryMatch extends Phaser.Scene {
         pairBg.strokeRoundedRect(0, 0, 220, 60, 16);
         this.uiObjs.push(pairBg);
 
-        this.pairTxt = this.add.text(this.width - 140, 55, `🧩 0 / ${this.totalPairs} çift`, {
+        this.pairTxt = this.add.text(this.width - 140, 55, `ğŸ§© 0 / ${this.totalPairs} Ã§ift`, {
             fontSize: '24px', fill: '#FFD166', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
         this.uiObjs.push(this.pairTxt);
@@ -310,7 +310,7 @@ export default class MemoryMatch extends Phaser.Scene {
         this.startTimer();
     }
 
-    // ─────────────── BOARD ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BOARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     buildBoard(cfg) {
         const { cols, rows } = cfg;
         const pool = this.getEmojis().slice(0, this.totalPairs);
@@ -331,13 +331,13 @@ export default class MemoryMatch extends Phaser.Scene {
         });
     }
 
-    // ─────────────── CARD ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     createCard(x, y, emoji, idx) {
         const W = 118, H = 118, R = 18;
 
         const container = this.add.container(x, y - 400).setAlpha(0);
 
-        // ── Arka Yüz: Yeşil Orman Teması
+        // â”€â”€ Arka YÃ¼z: YeÅŸil Orman TemasÄ±
         const back = this.add.graphics();
         back.fillStyle(0x2d8a40, 1);
         back.fillRoundedRect(-W/2, -H/2, W, H, R);
@@ -350,11 +350,11 @@ export default class MemoryMatch extends Phaser.Scene {
         back.fillEllipse(-15, 25, 20, 12);
         back.fillEllipse(22, -20, 22, 12);
 
-        const qmark = this.add.text(0, 0, '🍃', {
-            fontSize:'44px', fontFamily:'Arial'
+        const qmark = this.add.text(0, 0, 'ğŸƒ', {
+            fontSize:'44px', fontFamily:'Nunito'
         }).setOrigin(0.5);
 
-        // ── Ön Yüz: Sıcak Krem / Sarı Teması
+        // â”€â”€ Ã–n YÃ¼z: SÄ±cak Krem / SarÄ± TemasÄ±
         const front = this.add.graphics();
         front.fillStyle(0xFFFDE7, 1);
         front.fillRoundedRect(-W/2, -H/2, W, H, R);
@@ -363,7 +363,7 @@ export default class MemoryMatch extends Phaser.Scene {
         front.setVisible(false);
 
         const emojiTxt = this.add.text(0, 0, emoji, {
-            fontSize:'60px', fontFamily:'Arial'
+            fontSize:'60px', fontFamily:'Nunito'
         }).setOrigin(0.5).setVisible(false);
 
         container.add([back, qmark, front, emojiTxt]);
@@ -386,14 +386,14 @@ export default class MemoryMatch extends Phaser.Scene {
 
         this.cards.push(container);
 
-        // Kart giriş animasyonu (basamaklı)
+        // Kart giriÅŸ animasyonu (basamaklÄ±)
         this.tweens.add({
             targets: container, y, alpha:1, duration:350,
             delay: idx * 40, ease:'Back.easeOut'
         });
     }
 
-    // ─────────────── FLIP ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FLIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     flipCard(card) {
         if (this.isLocked || card.isFlipped || card.isMatched || this.gameOver) return;
 
@@ -415,12 +415,12 @@ export default class MemoryMatch extends Phaser.Scene {
         if (this.flipped.length === 2) {
             this.isLocked = true;
             this.moves++;
-            this.moveTxt.setText(`🔄 Hamle: ${this.moves}`);
+            this.moveTxt.setText(`ğŸ”„ Hamle: ${this.moves}`);
             this.time.delayedCall(350, () => this.checkMatch());
         }
     }
 
-    // ─────────────── CHECK MATCH ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CHECK MATCH â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     checkMatch() {
         const [c1, c2] = this.flipped;
         if (c1.pwEmoji === c2.pwEmoji) {
@@ -431,7 +431,7 @@ export default class MemoryMatch extends Phaser.Scene {
     }
 
     onMatch(c1, c2) {
-        const bonus = Math.ceil(this.timeLeft / this.totalTime * 30); // Hız bonusu
+        const bonus = Math.ceil(this.timeLeft / this.totalTime * 30); // HÄ±z bonusu
         this.score += 50 + bonus;
         this.matchedPairs++;
         c1.isMatched = true;
@@ -439,10 +439,10 @@ export default class MemoryMatch extends Phaser.Scene {
         this.flipped = [];
         this.isLocked = false;
 
-        this.scoreTxt.setText(`⭐ Skor: ${this.score}`);
-        this.pairTxt.setText(`🧩 ${this.matchedPairs} / ${this.totalPairs} çift`);
+        this.scoreTxt.setText(`â­ Skor: ${this.score}`);
+        this.pairTxt.setText(`ğŸ§© ${this.matchedPairs} / ${this.totalPairs} Ã§ift`);
 
-        // Yeşil parlama
+        // YeÅŸil parlama
         [c1, c2].forEach(c => {
             const gfx = c.list[2];
             this.tweens.add({ targets:c, scale:1.18, duration:120, yoyo:true });
@@ -453,7 +453,7 @@ export default class MemoryMatch extends Phaser.Scene {
         this.konfeti.emitParticleAt((c1.x+c2.x)/2, (c1.y+c2.y)/2, 25);
         this.cameras.main.flash(80, 6, 214, 160, 0.2);
 
-        // Puan uçuşu
+        // Puan uÃ§uÅŸu
         const ptt = this.add.text((c1.x+c2.x)/2, (c1.y+c2.y)/2 - 20, `+${50+bonus}`, {
             fontSize:'38px', fill:'#FFD166', fontFamily:'Nunito', fontWeight:'900'
         }).setOrigin(0.5).setShadow(2,2,'#000',5);
@@ -468,7 +468,7 @@ export default class MemoryMatch extends Phaser.Scene {
         this.cameras.main.shake(180, 0.008);
         this.cameras.main.flash(80, 255, 50, 50, 0.2);
 
-        // Kırmızı border geçici
+        // KÄ±rmÄ±zÄ± border geÃ§ici
         [c1, c2].forEach(c => {
             const gfx = c.list[2];
             gfx.lineStyle(4, 0xff4444, 1);
@@ -504,14 +504,14 @@ export default class MemoryMatch extends Phaser.Scene {
         });
     }
 
-    // ─────────────── TIMER ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TIMER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     startTimer() {
         this.drawTimerArc(1);
         this.timerEvt = this.time.addEvent({
             delay: 1000,
             callback: () => {
                 this.timeLeft--;
-                this.timerLabel.setText('⏳ ' + this.timeLeft);
+                this.timerLabel.setText('â³ ' + this.timeLeft);
                 this.drawTimerArc(this.timeLeft / this.totalTime);
                 if (this.timeLeft <= 5) this.timerLabel.setFill('#EF476F');
                 if (this.timeLeft <= 0 && !this.gameOver) this.triggerTimeOut();
@@ -556,25 +556,25 @@ export default class MemoryMatch extends Phaser.Scene {
         panel.lineStyle(3,0xf72585,1);
         panel.strokeRoundedRect(this.width/2-280, this.height/2-150, 560, 300, 24);
 
-        this.add.text(this.width/2, this.height/2-80, '⏰ SÜRE DOLDU!', {
+        this.add.text(this.width/2, this.height/2-80, 'â° SÃœRE DOLDU!', {
             fontSize:'56px', fill:'#EF476F', fontFamily:'Nunito', fontWeight:'900'
         }).setOrigin(0.5);
         this.add.text(this.width/2, this.height/2+0, `Skor: ${this.score}`, {
             fontSize:'40px', fill:'#FFD166', fontFamily:'Nunito', fontWeight:'800'
         }).setOrigin(0.5);
-        this.add.text(this.width/2, this.height/2+80, 'Tekrar oynamak için tıklayın', {
+        this.add.text(this.width/2, this.height/2+80, 'Tekrar oynamak iÃ§in tÄ±klayÄ±n', {
             fontSize:'24px', fill:'#aaa', fontFamily:'Nunito'
         }).setOrigin(0.5);
         this.input.once('pointerdown', () => this.scene.restart());
     }
 
-    // ─────────────── VICTORY ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ VICTORY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     triggerVictory() {
         if (this.gameOver) return;
         this.gameOver = true;
         if (this.timerEvt) this.timerEvt.remove();
 
-        // Hız bonusu dahil skor
+        // HÄ±z bonusu dahil skor
         const timeBonus = this.timeLeft * 5;
         this.score += timeBonus;
 
@@ -582,12 +582,12 @@ export default class MemoryMatch extends Phaser.Scene {
         let newRecord = false;
         if (engine) newRecord = engine.saveScore('memory-match', this.score);
 
-        // Yıldız hesapla
+        // YÄ±ldÄ±z hesapla
         const cfg   = this.getLevelConfig(this.difficulty);
         const stars = this.moves <= cfg.pairStars[0] ? 3
                     : this.moves <= cfg.pairStars[1] ? 2 : 1;
 
-        // Büyük konfeti
+        // BÃ¼yÃ¼k konfeti
         for (let i = 0; i < 5; i++) {
             this.time.delayedCall(i * 150, () => {
                 this.konfeti.emitParticleAt(
@@ -607,13 +607,13 @@ export default class MemoryMatch extends Phaser.Scene {
         panel.lineStyle(3,0x06D6A0,1);
         panel.strokeRoundedRect(this.width/2-300, this.height/2-200, 600, 400, 28);
 
-        this.add.text(this.width/2, this.height/2-150, '🎉 TEBRİKLER!', {
+        this.add.text(this.width/2, this.height/2-150, 'ğŸ‰ TEBRÄ°KLER!', {
             fontSize:'56px', fill:'#06D6A0', fontFamily:'Nunito', fontWeight:'900'
         }).setOrigin(0.5);
 
-        // Yıldızlar
+        // YÄ±ldÄ±zlar
         const starRow = this.add.text(this.width/2, this.height/2-75,
-            '⭐'.repeat(stars) + '☆'.repeat(3-stars), {
+            'â­'.repeat(stars) + 'â˜†'.repeat(3-stars), {
             fontSize:'52px'
         }).setOrigin(0.5);
         this.tweens.add({ targets:starRow, scale:1.15, duration:600, yoyo:true, repeat:-1, ease:'Sine.easeInOut' });
@@ -622,24 +622,24 @@ export default class MemoryMatch extends Phaser.Scene {
             fontSize:'42px', fill:'#FFD166', fontFamily:'Nunito', fontWeight:'800'
         }).setOrigin(0.5);
 
-        this.add.text(this.width/2, this.height/2+60, `Hamle: ${this.moves}  ·  Süre Bonusu: +${timeBonus}`, {
+        this.add.text(this.width/2, this.height/2+60, `Hamle: ${this.moves}  Â·  SÃ¼re Bonusu: +${timeBonus}`, {
             fontSize:'22px', fill:'#c8b8ff', fontFamily:'Nunito'
         }).setOrigin(0.5);
 
         if (newRecord) {
-            this.add.text(this.width/2, this.height/2+105, '🏆 YENİ REKOR!', {
+            this.add.text(this.width/2, this.height/2+105, 'ğŸ† YENÄ° REKOR!', {
                 fontSize:'32px', fill:'#FFD166', fontFamily:'Nunito', fontWeight:'800'
             }).setOrigin(0.5);
         }
 
-        this.add.text(this.width/2, this.height/2+160, 'Tekrar oynamak için tıklayın', {
+        this.add.text(this.width/2, this.height/2+160, 'Tekrar oynamak iÃ§in tÄ±klayÄ±n', {
             fontSize:'24px', fill:'#aaa', fontFamily:'Nunito'
         }).setOrigin(0.5);
 
         this.input.once('pointerdown', () => this.scene.restart());
     }
 
-    // ─────────────── UPDATE ───────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ UPDATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     update() {
         if (this.starField) this.starField.tilePositionY -= 0.3;
         if (this.starField) this.starField.tilePositionX += 0.15;
