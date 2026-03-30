@@ -1,6 +1,6 @@
-﻿/**
+/**
  * GNNgame: Cosmic Surfer - ULTIMATE Phaser Version
- * Manyak Ã–zellikler: Gravity Flip, Parallax Background, Particle Trails, Combo System
+ * Manyak Özellikler: Gravity Flip, Parallax Background, Particle Trails, Combo System
  */
 
 export default class CosmicSurfer extends Phaser.Scene {
@@ -14,7 +14,7 @@ export default class CosmicSurfer extends Phaser.Scene {
         this.lives = 3;
         this.isGameOver = false;
         this.gameSpeed = 400;
-        this.gravitySign = 1; // 1: AÅŸaÄŸÄ±, -1: YukarÄ±
+        this.gravitySign = 1; // 1: Aşağı, -1: Yukarı
         this.width = 1280;
         this.height = 720;
         this.combo = 0;
@@ -24,12 +24,12 @@ export default class CosmicSurfer extends Phaser.Scene {
         if (engine) this.highScore = engine.getHighScore('cosmic-surfer');
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PRELOAD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ─────────────────────────────── PRELOAD ──────────────────────────────
     preload() {
-        // Grafikleri kodla Ã¼reteceÄŸimiz iÃ§in dÄ±ÅŸ asset'e ihtiyaÃ§ yok (Full Performance)
+        // Grafikleri kodla üreteceğimiz için dış asset'e ihtiyaç yok (Full Performance)
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CREATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ─────────────────────────────── CREATE ───────────────────────────────
     create() {
         this.buildBackground();
         this.buildPlayer();
@@ -60,14 +60,14 @@ export default class CosmicSurfer extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 10, 10, 30);
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BUILDERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ─────────────────────────────── BUILDERS ─────────────────────────────
     buildBackground() {
-        // Koyu Uzay GradyanÄ±
+        // Koyu Uzay Gradyanı
         const bg = this.add.graphics();
         bg.fillGradientStyle(0x05051a, 0x05051a, 0x1a0a3a, 0x1a0a3a, 1);
         bg.fillRect(0, 0, this.width, this.height);
 
-        // Parallax YÄ±ldÄ±zlar (3 Katman)
+        // Parallax Yıldızlar (3 Katman)
         this.starLayers = [];
         for (let i = 0; i < 3; i++) {
             const layer = this.add.group();
@@ -91,14 +91,14 @@ export default class CosmicSurfer extends Phaser.Scene {
     buildPlayer() {
         this.player = this.add.container(200, this.height / 2);
         
-        // GÃ¶vde (Diamond Shape)
+        // Gövde (Diamond Shape)
         const g = this.add.graphics();
         g.fillStyle(0x4cc9f0, 1);
         g.fillRoundedRect(-20, -20, 40, 40, 8);
         g.lineStyle(4, 0xffffff, 1);
         g.strokeRoundedRect(-20, -20, 40, 40, 8);
         
-        // Neon Glow (DÄ±ÅŸ halka)
+        // Neon Glow (Dış halka)
         g.lineStyle(2, 0x4cc9f0, 0.5);
         g.strokeCircle(0, 0, 30);
 
@@ -163,7 +163,7 @@ export default class CosmicSurfer extends Phaser.Scene {
     buildUI() {
         this.gameUI = [];
 
-        // â”€â”€ Skor Panosu (Sol Ãœst)
+        // ── Skor Panosu (Sol Üst)
         const scoreBg = this.add.graphics({ x: 30, y: 25 }).setDepth(99);
         scoreBg.fillStyle(0x1a1a4e, 0.9);
         scoreBg.fillRoundedRect(0, 0, 240, 60, 16);
@@ -171,12 +171,12 @@ export default class CosmicSurfer extends Phaser.Scene {
         scoreBg.strokeRoundedRect(0, 0, 240, 60, 16);
         this.gameUI.push(scoreBg);
 
-        this.scoreTxt = this.add.text(150, 55, 'âš¡ Skor: 0', {
+        this.scoreTxt = this.add.text(150, 55, '⚡ Skor: 0', {
             fontSize: '30px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
         this.gameUI.push(this.scoreTxt);
 
-        // â”€â”€ Can Panosu (Orta Ãœst)
+        // ── Can Panosu (Orta Üst)
         const livesBg = this.add.graphics({ x: this.width / 2 - 80, y: 25 }).setDepth(99);
         livesBg.fillStyle(0x1a1a4e, 0.9);
         livesBg.fillRoundedRect(0, 0, 160, 60, 16);
@@ -186,12 +186,12 @@ export default class CosmicSurfer extends Phaser.Scene {
 
         this.lifeIcons = [];
         for (let i = 0; i < 3; i++) {
-            const icon = this.add.text(this.width / 2 - 40 + i * 40, 55, 'â¤ï¸', { fontSize: '28px' }).setOrigin(0.5).setDepth(100);
+            const icon = this.add.text(this.width / 2 - 40 + i * 40, 55, '❤️', { fontSize: '28px' }).setOrigin(0.5).setDepth(100);
             this.lifeIcons.push(icon);
             this.gameUI.push(icon);
         }
 
-        // â”€â”€ YÃ¼ksek Skor Panosu (SaÄŸ Ãœst)
+        // ── Yüksek Skor Panosu (Sağ Üst)
         const hsBg = this.add.graphics({ x: this.width - 270, y: 25 }).setDepth(99);
         hsBg.fillStyle(0x1a1a4e, 0.9);
         hsBg.fillRoundedRect(0, 0, 240, 60, 16);
@@ -199,24 +199,24 @@ export default class CosmicSurfer extends Phaser.Scene {
         hsBg.strokeRoundedRect(0, 0, 240, 60, 16);
         this.gameUI.push(hsBg);
 
-        this.highScoreTxt = this.add.text(this.width - 150, 55, `ğŸ† Rekor: ${this.highScore}`, {
+        this.highScoreTxt = this.add.text(this.width - 150, 55, `🏆 Rekor: ${this.highScore}`, {
             fontSize: '28px', fill: '#FFD166', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5).setDepth(100);
         this.gameUI.push(this.highScoreTxt);
 
-        // â”€â”€ Combo Panosu (Sol Ãœst AltÄ±)
+        // ── Combo Panosu (Sol Üst Altı)
         this.comboPanel = this.add.container(30, 100).setAlpha(0).setDepth(100);
         const cBg = this.add.graphics();
         cBg.fillStyle(0xf72585, 0.9);
         cBg.fillRoundedRect(0, 0, 180, 45, 12);
-        this.comboTxt = this.add.text(90, 22, 'ğŸ”¥ COMBO x0', {
+        this.comboTxt = this.add.text(90, 22, '🔥 COMBO x0', {
             fontSize: '22px', fill: '#fff', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5);
         this.comboPanel.add([cBg, this.comboTxt]);
         this.gameUI.push(this.comboPanel);
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ ACTIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ─────────────────────────────── ACTIONS ──────────────────────────────
     flipGravity() {
         if (this.isGameOver) return;
         this.gravitySign *= -1;
@@ -315,10 +315,10 @@ export default class CosmicSurfer extends Phaser.Scene {
 
         const gained = 100 * this.combo;
         this.score += gained;
-        this.scoreTxt.setText(`âš¡ Skor: ${this.score}`);
+        this.scoreTxt.setText(`⚡ Skor: ${this.score}`);
         
         if (this.combo > 1) {
-            this.comboTxt.setText(`ğŸ”¥ COMBO x${this.combo}`);
+            this.comboTxt.setText(`🔥 COMBO x${this.combo}`);
             this.comboPanel.setAlpha(1);
             this.tweens.add({ targets: this.comboPanel, scale: 1.1, duration: 100, yoyo: true });
         } else {
@@ -339,7 +339,7 @@ export default class CosmicSurfer extends Phaser.Scene {
     hitObstacle(player, obs) {
         if (this.isGameOver) return;
         
-        // Bu engele Ã§arptÄ±ÄŸÄ±mÄ±zda geÃ§ici olarak devredÄ±ÅŸÄ± bÄ±rakalÄ±m
+        // Bu engele çarptığımızda geçici olarak devredışı bırakalım
         obs.destroy();
         
         this.lives--;
@@ -408,7 +408,7 @@ export default class CosmicSurfer extends Phaser.Scene {
         panel.strokeRoundedRect(this.width / 2 - 300, this.height / 2 - 180, 600, 360, 24);
         this.gameOverObjs.push(panel);
 
-        const t1 = this.add.text(this.width / 2, this.height / 2 - 120, 'OYUN BÄ°TTÄ°!', {
+        const t1 = this.add.text(this.width / 2, this.height / 2 - 120, 'OYUN BİTTİ!', {
             fontSize: '64px', fill: '#EF476F', fontFamily: 'Nunito', fontWeight: 'bold'
         }).setOrigin(0.5);
         this.gameOverObjs.push(t1);
@@ -419,14 +419,14 @@ export default class CosmicSurfer extends Phaser.Scene {
         this.gameOverObjs.push(t2);
 
         if (isNew) {
-            const t3 = this.add.text(this.width / 2, this.height / 2 + 50, 'ğŸ‰ YENÄ° REKOR! ğŸ‰', {
+            const t3 = this.add.text(this.width / 2, this.height / 2 + 50, '🎉 YENİ REKOR! 🎉', {
                 fontSize: '38px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: 'bold'
             }).setOrigin(0.5);
             this.gameOverObjs.push(t3);
             this.tweens.add({ targets: t3, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
         }
 
-        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Ana MenÃ¼ye DÃ¶n', {
+        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Ana Menüye Dön', {
             fontSize: '26px', fill: '#aaa', fontFamily: 'Nunito', backgroundColor: '#333', padding: { x: 20, y: 10 }
         }).setOrigin(0.5).setInteractive({ useHandCursor: true });
         this.gameOverObjs.push(t4);
@@ -436,7 +436,7 @@ export default class CosmicSurfer extends Phaser.Scene {
         });
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ UPDATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ─────────────────────────────── UPDATE ───────────────────────────────
     update(time, delta) {
         if (this.isGameOver) return;
 

@@ -1,6 +1,6 @@
-﻿/**
+/**
  * GNNgame: Space Defender - ULTIMATE (Collectible Power-up Drop System)
- * Ã–dÃ¼ller gÃ¶ktaÅŸÄ± gibi dÃ¼ÅŸer, tÄ±klanarak toplanÄ±r.
+ * Ödüller göktaşı gibi düşer, tıklanarak toplanır.
  */
 export default class SpaceDefender extends Phaser.Scene {
     constructor() {
@@ -14,18 +14,18 @@ export default class SpaceDefender extends Phaser.Scene {
         this.width        = 1280;
         this.height       = 720;
         this.meteors      = [];
-        this.drops        = [];      // Ekrandaki Ã¶dÃ¼l simgeleri
+        this.drops        = [];      // Ekrandaki ödül simgeleri
         this.hitsCount    = 0;
         this.lastAutoFire = 0;
         this.spawnDelay   = 1200;
         this.speedMul     = 1.0;
         this._lastDiff    = null;
 
-        // Aktif gÃ¼Ã§lendirmeler (ms, 0 = pasif)
+        // Aktif güçlendirmeler (ms, 0 = pasif)
         this.pw = { shield:0, rapid:0, triple:0, magnet:0, drone:0, nuke:false };
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CREATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── CREATE ─────────────────────────
     create() {
         this.add.rectangle(0, 0, this.width, this.height, 0x050811).setOrigin(0);
         this.buildGalaxy();
@@ -46,7 +46,7 @@ export default class SpaceDefender extends Phaser.Scene {
         this.input.on('pointerdown', (p) => this.onPointerDown(p));
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BUILD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── BUILD ─────────────────────────
     buildGalaxy() {
         const colors = [0x4b0082, 0x00008b, 0x191970, 0x2e0057];
         for (let i = 0; i < 7; i++) {
@@ -97,23 +97,23 @@ export default class SpaceDefender extends Phaser.Scene {
     }
 
     buildUI() {
-        // â”€â”€ Skor Panosu
+        // ── Skor Panosu
         const scoreBg = this.add.graphics({ x: this.width/2 - 120, y: 15 });
         scoreBg.fillStyle(0x050811, 0.8);
         scoreBg.fillRoundedRect(0, 0, 240, 60, 16);
         scoreBg.lineStyle(4, 0x4a90d9, 1);
         scoreBg.strokeRoundedRect(0, 0, 240, 60, 16);
 
-        this.scoreTxt = this.add.text(this.width/2, 45, 'â­ 0', {
+        this.scoreTxt = this.add.text(this.width/2, 45, '⭐ 0', {
             fontSize: '38px', fill: '#FFD700', fontFamily: 'Nunito', fontWeight: '900'
         }).setOrigin(0.5);
 
         // Canlar
         this.lifeIcons = [];
         for (let i = 0; i < 3; i++)
-            this.lifeIcons.push(this.add.text(28 + i*48, 28, 'â¤ï¸', { fontSize:'36px' }));
+            this.lifeIcons.push(this.add.text(28 + i*48, 28, '❤️', { fontSize:'36px' }));
 
-        // Aktif Ã–dÃ¼l GÃ¶stergesi (can barÄ±nÄ±n hemen yanÄ±)
+        // Aktif Ödül Göstergesi (can barının hemen yanı)
         this.activePwContainer = this.add.container(200, 28);
         this.activePwIcon = this.add.text(0, 0, '', { fontSize:'32px' });
         this.activePwTimer = this.add.text(40, 8, '', {
@@ -121,7 +121,7 @@ export default class SpaceDefender extends Phaser.Scene {
         });
         this.activePwContainer.add([this.activePwIcon, this.activePwTimer]);
 
-        // MÄ±knatÄ±s Ã§emberi
+        // Mıknatıs çemberi
         this.magnetCircle = this.add.circle(0,0,160,0xAA00FF,0.08)
             .setStrokeStyle(2,0xAA00FF,0.5).setAlpha(0);
     }
@@ -141,20 +141,20 @@ export default class SpaceDefender extends Phaser.Scene {
         this.droneObj.setAlpha(0);
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ POWER-UP POOL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── POWER-UP POOL ─────────────────────────
     getPowerupPool() {
         return [
-            { key:'shield', emoji:'ğŸ›¡ï¸', label:'Lazer Bariyeri', color:0x00FFFF, dur:10000, w:10 },
-            { key:'rapid',  emoji:'ğŸ”¥', label:'Seri AtÄ±ÅŸ',       color:0xFF6600, dur:20000, w:20 },
-            { key:'triple', emoji:'ğŸ¹', label:'ÃœÃ§lÃ¼ AtÄ±ÅŸ',       color:0xFF69B4, dur:15000, w:20 },
-            { key:'magnet', emoji:'ğŸ§²', label:'MÄ±knatÄ±s',        color:0xAA00FF, dur:10000, w:10 },
-            { key:'drone',  emoji:'ğŸ¤–', label:'Drone',           color:0x00FF99, dur:20000, w:15 },
-            { key:'nuke',   emoji:'ğŸ’¥', label:'Atom BombasÄ±',    color:0xFF4500, dur:0,     w:10 },
-            { key:'life',   emoji:'â¤ï¸', label:'Ekstra Can',      color:0xFF0000, dur:0,     w:15 },
+            { key:'shield', emoji:'🛡️', label:'Lazer Bariyeri', color:0x00FFFF, dur:10000, w:10 },
+            { key:'rapid',  emoji:'🔥', label:'Seri Atış',       color:0xFF6600, dur:20000, w:20 },
+            { key:'triple', emoji:'🏹', label:'Üçlü Atış',       color:0xFF69B4, dur:15000, w:20 },
+            { key:'magnet', emoji:'🧲', label:'Mıknatıs',        color:0xAA00FF, dur:10000, w:10 },
+            { key:'drone',  emoji:'🤖', label:'Drone',           color:0x00FF99, dur:20000, w:15 },
+            { key:'nuke',   emoji:'💥', label:'Atom Bombası',    color:0xFF4500, dur:0,     w:10 },
+            { key:'life',   emoji:'❤️', label:'Ekstra Can',      color:0xFF0000, dur:0,     w:15 },
         ];
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ DROP SPAWN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── DROP SPAWN ─────────────────────────
     spawnDrop(pool) {
         const total = pool.reduce((s,p) => s+p.w, 0);
         let r = Phaser.Math.Between(0, total-1);
@@ -181,7 +181,7 @@ export default class SpaceDefender extends Phaser.Scene {
         });
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ METEOR SPAWN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── METEOR SPAWN ────────────────────────
     spawnMeteor() {
         if (this.gameOver) return;
         const x = Phaser.Math.Between(150, this.width-150);
@@ -197,21 +197,21 @@ export default class SpaceDefender extends Phaser.Scene {
         this.meteors.push(m);
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ INPUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── INPUT ─────────────────────────────
     onPointerDown(p) {
         if (this.gameOver) return;
 
-        // Ã–nce Ã¶dÃ¼l toplanabilir mi kontrol et
+        // Önce ödül toplanabilir mi kontrol et
         for (let i = this.drops.length - 1; i >= 0; i--) {
             const d = this.drops[i];
             const dist = Phaser.Math.Distance.Between(p.x, p.y, d.x, d.y);
             if (dist < d.radius + 20) {
                 this.collectDrop(d, i);
-                return; // Ã–dÃ¼l toplandÄ±, lazer atma
+                return; // Ödül toplandı, lazer atma
             }
         }
 
-        // Atom BombasÄ± bekleniyorsa patlat
+        // Atom Bombası bekleniyorsa patlat
         if (this.pw.nuke) { this.triggerNuke(); return; }
 
         this.fireLaser(p);
@@ -224,7 +224,7 @@ export default class SpaceDefender extends Phaser.Scene {
         this.cameras.main.flash(80, 255, 220, 0, 0.25);
         this.boom.emitParticleAt(drop.x, drop.y, 12);
 
-        // GÃ¼Ã§lendirmeyi uygula
+        // Güçlendirmeyi uygula
         switch (def.key) {
             case 'shield': this.pw.shield = def.dur; this.barrierLine.setAlpha(1); break;
             case 'rapid':  this.pw.rapid  = def.dur; this.nozzle.setFillStyle(0xFFD700,1); break;
@@ -237,7 +237,7 @@ export default class SpaceDefender extends Phaser.Scene {
                 break;
         }
 
-        // Aktif Ã¶dÃ¼l gÃ¶stergesini gÃ¼ncelle (sÃ¼reliler iÃ§in)
+        // Aktif ödül göstergesini güncelle (süreliler için)
         if (def.dur > 0) {
             this.currentPwDef = def;
             this.activePwIcon.setText(def.emoji);
@@ -251,7 +251,7 @@ export default class SpaceDefender extends Phaser.Scene {
         this.drops.splice(index, 1);
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LASER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── LASER ─────────────────────────────
     fireLaser(pointer) {
         const angle = this.cannon.rotation;
         const nx = this.width/2 + Math.cos(angle - Math.PI/2)*110;
@@ -301,26 +301,26 @@ export default class SpaceDefender extends Phaser.Scene {
         [...this.meteors].forEach(m => { this.boom.emitParticleAt(m.x, m.y, 8); m.destroy(); });
         this.meteors = [];
         this.score += 50;
-        this.scoreTxt.setText('â­ ' + this.score);
+        this.scoreTxt.setText('⭐ ' + this.score);
     }
 
     hitMeteor(m, index) {
         this.score += 10;
         this.hitsCount++;
-        this.scoreTxt.setText('â­ ' + this.score);
+        this.scoreTxt.setText('⭐ ' + this.score);
         this.boom.emitParticleAt(m.x, m.y, 12);
         this.cameras.main.shake(70, 0.008);
         m.destroy();
         this.meteors.splice(index, 1);
 
-        // Ã–dÃ¼l dÃ¼ÅŸÃ¼rme eÅŸiÄŸi
+        // Ödül düşürme eşiği
         const threshold = this.hitsCount < 40 ? 20 : this.hitsCount < 80 ? 30 : 40;
         if (this.hitsCount % threshold === 0) {
             this.spawnDrop(this.getPowerupPool());
         }
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ UPDATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ───────────────────────── UPDATE ─────────────────────────────
     update(time, delta) {
         if (this.gameOver) return;
 
@@ -335,13 +335,13 @@ export default class SpaceDefender extends Phaser.Scene {
         this.updateDrops();
         this.updateMeteors();
 
-        // Zorluk artÄ±ÅŸÄ± â€” 7-8 yaÅŸ grubuna gÃ¶re Ã§ok yavaÅŸ ve yumuÅŸak kademe
-        // Her 20 saniyede bir tetiklenir. HÄ±z maksimum 1.6x ile sÄ±nÄ±rlÄ±.
+        // Zorluk artışı — 7-8 yaş grubuna göre çok yavaş ve yumuşak kademe
+        // Her 20 saniyede bir tetiklenir. Hız maksimum 1.6x ile sınırlı.
         if (!this._lastDiff) this._lastDiff = time;
         if (time - this._lastDiff > 20000) {
             this._lastDiff = time;
             this.spawnDelay = Math.max(750, this.spawnDelay - 30); // Min 750ms ara
-            this.speedMul   = Math.min(1.6, this.speedMul + 0.06); // Max 1.6x hÄ±z
+            this.speedMul   = Math.min(1.6, this.speedMul + 0.06); // Max 1.6x hız
             this.spawnTimer.reset({
                 delay: this.spawnDelay,
                 callback: this.spawnMeteor,
@@ -393,7 +393,7 @@ export default class SpaceDefender extends Phaser.Scene {
             if (this.pw.shield <= 0) { this.barrierLine.setAlpha(0); this.clearActivePw('shield'); }
         }
 
-        // HUD gÃ¼ncelle
+        // HUD güncelle
         if (this.currentPwDef && this.currentPwDef.dur > 0 && remaining > 0) {
             this.activePwTimer.setText(Math.ceil(remaining/1000) + 's');
         } else if (this.pw.nuke) {
@@ -475,13 +475,13 @@ export default class SpaceDefender extends Phaser.Scene {
         ov.fillStyle(0x000000, 0.88);
         ov.fillRect(0, 0, this.width, this.height);
 
-        this.add.text(this.width/2, this.height/2 - 60, 'SAVUNMA HATTI Ã‡Ã–KTÃœ!', {
+        this.add.text(this.width/2, this.height/2 - 60, 'SAVUNMA HATTI ÇÖKTÜ!', {
             fontSize:'60px', fill:'#EF476F', fontFamily:'Nunito', fontWeight:'bold'
         }).setOrigin(0.5);
         this.add.text(this.width/2, this.height/2 + 20, `Skor: ${this.score}`, {
             fontSize:'42px', fill:'#FFD700', fontFamily:'Nunito', fontWeight:'bold'
         }).setOrigin(0.5);
-        this.add.text(this.width/2, this.height/2 + 100, 'Tekrar oynamak iÃ§in tÄ±klayÄ±n', {
+        this.add.text(this.width/2, this.height/2 + 100, 'Tekrar oynamak için tıklayın', {
             fontSize:'26px', fill:'#aaa', fontFamily:'Nunito'
         }).setOrigin(0.5);
         this.input.once('pointerdown', () => this.scene.restart());

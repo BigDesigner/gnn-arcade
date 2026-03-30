@@ -1,4 +1,4 @@
-﻿/**
+/**
  * GNNgame Core Engine
  * Architect: Gemini (Hybrid Strategy)
  */
@@ -38,24 +38,24 @@ class GNNGameEngine {
             }
         }
 
-        // Tam Ekran KontrolÃ¼
+        // Tam Ekran Kontrolü
         const fullscreenBtn = document.getElementById('toggle-fullscreen');
         if (fullscreenBtn) {
             fullscreenBtn.addEventListener('click', () => {
                 const wrapper = document.getElementById('canvas-wrapper');
                 if (!document.fullscreenElement) {
-                    // Tam ekrana geÃ§
+                    // Tam ekrana geç
                     wrapper.requestFullscreen().catch(err => {
-                        console.error(`Tam ekran hatasÄ±: ${err.message}`);
+                        console.error(`Tam ekran hatası: ${err.message}`);
                     });
                 } else {
-                    // Tam ekrandan Ã§Ä±k
+                    // Tam ekrandan çık
                     document.exitFullscreen();
                 }
             });
         }
 
-        // Logo TÄ±klama (Ana Sayfa)
+        // Logo Tıklama (Ana Sayfa)
         const goHome = document.getElementById('go-home');
         if (goHome) {
             goHome.style.cursor = 'pointer';
@@ -68,15 +68,15 @@ class GNNGameEngine {
         // 1. Hash Routing Dinle
         window.addEventListener('hashchange', () => this.handleRouting());
 
-        // 2. Oyun Listesini YÃ¼kle
+        // 2. Oyun Listesini Yükle
         try {
             const response = await fetch('games.json');
             const data = await response.json();
             this.renderHome(data.games);
             this.populateSelector(data.games);
-            this.handleRouting(); // Sayfa ilk aÃ§Ä±ldÄ±ÄŸÄ±nda kontrol et
+            this.handleRouting(); // Sayfa ilk açıldığında kontrol et
         } catch (err) {
-            console.error("GNNgame Error: Manifest bulunamadÄ±!", err);
+            console.error("GNNgame Error: Manifest bulunamadı!", err);
         }
     }
 
@@ -88,13 +88,13 @@ class GNNGameEngine {
             const gameModule = await import(`./games/${gameId}/script.js`);
             const GameContent = gameModule.default || gameModule;
 
-            // UI GeÃ§iÅŸi
+            // UI Geçişi
             const homeView = document.getElementById('home-view');
             const gameView = document.getElementById('game-view');
             if (homeView) homeView.classList.add('hidden');
             if (gameView) gameView.classList.remove('hidden');
 
-            // --- Phaser vs Plain JS AyrÄ±mÄ± ---
+            // --- Phaser vs Plain JS Ayrımı ---
             const isPhaserScene = typeof GameContent === 'function' && 
                                  window.Phaser && 
                                  (GameContent.prototype instanceof window.Phaser.Scene || GameContent.name);
@@ -118,16 +118,16 @@ class GNNGameEngine {
                     }
                 };
                 
-                // Eski canvas'Ä± gizle, Phaser kendi canvas'Ä±nÄ± 'canvas-wrapper' iÃ§ine oluÅŸturacak
+                // Eski canvas'ı gizle, Phaser kendi canvas'ını 'canvas-wrapper' içine oluşturacak
                 if (this.canvas) this.canvas.style.display = 'none';
                 
                 this.phaserGame = new Phaser.Game(config);
                 this.activeGame = { isPhaser: true, instance: this.phaserGame };
                 
-                // Phaser instance'Ä±na global engine'i enjekte et (Skor vb iÃ§in)
+                // Phaser instance'ına global engine'i enjekte et (Skor vb için)
                 this.phaserGame.gameEngine = this;
             } else {
-                // Klasik Plain JS YapÄ±sÄ±
+                // Klasik Plain JS Yapısı
                 console.log(`${gameId}: Detected Plain JS Module.`);
                 this.activeGame = GameContent;
                 if (this.canvas) {
@@ -136,7 +136,7 @@ class GNNGameEngine {
                 }
             }
         } catch (err) {
-            alert("Oyun yÃ¼klenirken bir hata oluÅŸtu!");
+            alert("Oyun yüklenirken bir hata oluştu!");
             console.error(err);
         }
     }
@@ -146,11 +146,11 @@ class GNNGameEngine {
         
         if (this.activeGame) {
             if (this.activeGame.isPhaser) {
-                // Phaser TemizliÄŸi
+                // Phaser Temizliği
                 console.log("Destroying Phaser Instance...");
                 this.activeGame.instance.destroy(true);
             } else if (this.activeGame.destroy) {
-                // Plain JS TemizliÄŸi
+                // Plain JS Temizliği
                 this.activeGame.destroy();
             }
         }
@@ -158,7 +158,7 @@ class GNNGameEngine {
         this.activeGame = null;
         this.phaserGame = null;
 
-        // Canvas Reset (Plain JS iÃ§in)
+        // Canvas Reset (Plain JS için)
         if (this.canvas) {
             this.canvas.style.display = 'block';
             const newCtx = this.canvas.getContext('2d');
@@ -195,10 +195,10 @@ class GNNGameEngine {
             const highScore = this.getHighScore(game.id);
             return `
             <div class="game-card" onclick="location.hash='${game.id}'">
-                ${highScore > 0 ? `<div class="badge">ğŸš€ Skor: ${highScore}</div>` : ''}
+                ${highScore > 0 ? `<div class="badge">🚀 Skor: ${highScore}</div>` : ''}
                 <div class="card-thumbnail">
                     <img src="${game.thumbnail}" alt="${game.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="card-thumbnail-fallback" style="display:none;">ğŸ®</div>
+                    <div class="card-thumbnail-fallback" style="display:none;">🎮</div>
                 </div>
                 <h3>${game.title}</h3>
                 <p>${game.description}</p>

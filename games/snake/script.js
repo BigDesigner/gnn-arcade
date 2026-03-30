@@ -1,7 +1,7 @@
-﻿/**
- * GNNgame: Neon YÄ±lan (Snake) - ULTIMATE Phaser Version
- * Ã–zellikler: Neon Grid Arka Plan, PartikÃ¼ller, Kamera SarsÄ±ntÄ±larÄ±,
- *             Dinamik HÄ±zlanma, GÃ¶kkuÅŸaÄŸÄ± Rengi YÄ±lan
+/**
+ * GNNgame: Neon Yılan (Snake) - ULTIMATE Phaser Version
+ * Özellikler: Neon Grid Arka Plan, Partiküller, Kamera Sarsıntıları,
+ *             Dinamik Hızlanma, Gökkuşağı Rengi Yılan
  */
 export default class Snake extends Phaser.Scene {
     constructor() {
@@ -13,7 +13,7 @@ export default class Snake extends Phaser.Scene {
         this.width = 1280;
         this.height = 720;
         
-        // Grid'e oturtmak iÃ§in tam sÄ±nÄ±rlarÄ± ayarlayalÄ±m
+        // Grid'e oturtmak için tam sınırları ayarlayalım
         this.cols = Math.floor(this.width / this.gridSize);
         this.rows = Math.floor(this.height / this.gridSize);
 
@@ -30,27 +30,27 @@ export default class Snake extends Phaser.Scene {
         this.score = 0;
         this.gameOver = false;
         
-        // ZamanlayÄ±cÄ±
+        // Zamanlayıcı
         this.moveTimer = 0;
         this.baseMoveSpeed = 160; 
         this.currentMoveSpeed = 160; 
     }
 
     create() {
-        // â”€â”€ NEON ARKA PLAN â”€â”€
+        // ── NEON ARKA PLAN ──
         this.buildNeonBackground();
 
-        // â”€â”€ PARTÄ°KÃœLLER â”€â”€
+        // ── PARTİKÜLLER ──
         this.buildParticles();
 
-        // â”€â”€ Ã‡Ä°ZÄ°M OBJESÄ° (Graphics) â”€â”€
+        // ── ÇİZİM OBJESİ (Graphics) ──
         this.graphics = this.add.graphics();
-        this.graphics.setDepth(10); // YÄ±lan ve elma Ã¼stte
+        this.graphics.setDepth(10); // Yılan ve elma üstte
 
-        // â”€â”€ ARAYÃœZ (UI) â”€â”€
+        // ── ARAYÜZ (UI) ──
         this.buildUI();
 
-        // â”€â”€ KONTROLLER â”€â”€
+        // ── KONTROLLER ──
         this.cursors = this.input.keyboard.createCursorKeys();
         
         // Mobil / Dokunmatik
@@ -72,10 +72,10 @@ export default class Snake extends Phaser.Scene {
             }
         });
 
-        // â”€â”€ ELMA YERLEÅTÄ°RME â”€â”€
+        // ── ELMA YERLEŞTİRME ──
         this.placeApple();
 
-        // Ä°lk baÅŸlangÄ±Ã§ gÃ¶steriÅŸi
+        // İlk başlangıç gösterişi
         this.cameras.main.fadeIn(500, 0, 0, 0);
     }
 
@@ -85,9 +85,9 @@ export default class Snake extends Phaser.Scene {
         bg.fillGradientStyle(0x0f0c29, 0x0f0c29, 0x302b63, 0x302b63, 1);
         bg.fillRect(0, 0, this.width, this.height);
 
-        // Neon Ä±zgara (Grid) Ã§izimi
+        // Neon ızgara (Grid) çizimi
         const gridGfx = this.add.graphics();
-        gridGfx.lineStyle(1, 0x06D6A0, 0.15); // Saydam neon yeÅŸil Ã§izgiler
+        gridGfx.lineStyle(1, 0x06D6A0, 0.15); // Saydam neon yeşil çizgiler
 
         for (let x = 0; x < this.width; x += this.gridSize) {
             gridGfx.beginPath();
@@ -102,13 +102,13 @@ export default class Snake extends Phaser.Scene {
             gridGfx.strokePath();
         }
         
-        // KÃ¶ÅŸelere neon parlamalarÄ± (Radial Gradient yok ama yuvarlakla simÃ¼le edebiliriz)
+        // Köşelere neon parlamaları (Radial Gradient yok ama yuvarlakla simüle edebiliriz)
         this.add.circle(0, 0, 400, 0x06D6A0, 0.1).setBlendMode(Phaser.BlendModes.ADD);
         this.add.circle(this.width, this.height, 400, 0xF72585, 0.1).setBlendMode(Phaser.BlendModes.ADD);
     }
 
     buildParticles() {
-        // Elma yenme patlamasÄ± (Pembe yÄ±ldÄ±zlar)
+        // Elma yenme patlaması (Pembe yıldızlar)
         const eatGfx = this.make.graphics({ x:0, y:0, add:false });
         eatGfx.fillStyle(0xffffff, 1);
         eatGfx.fillRect(0, 0, 8, 8);
@@ -123,7 +123,7 @@ export default class Snake extends Phaser.Scene {
             emitting: false
         }).setDepth(15);
 
-        // Ã–lÃ¼m patlamasÄ±
+        // Ölüm patlaması
         this.deathBurst = this.add.particles(0, 0, 'apple-bit', {
             speed: { min: 200, max: 600 },
             scale: { start: 2, end: 0 },
@@ -141,7 +141,7 @@ export default class Snake extends Phaser.Scene {
         hudBg.lineStyle(3, 0x06D6A0, 1);
         hudBg.strokeRoundedRect(30, 30, 260, 60, 15);
 
-        this.scoreText = this.add.text(160, 60, 'âš¡ Skor: 0', {
+        this.scoreText = this.add.text(160, 60, '⚡ Skor: 0', {
             fontSize: '32px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: '900',
             shadow: { offsetX: 0, offsetY: 0, color: '#06D6A0', blur: 10, fill: true }
         }).setOrigin(0.5).setDepth(105);
@@ -154,7 +154,7 @@ export default class Snake extends Phaser.Scene {
             hudBg.lineStyle(3, 0xF72585, 1);
             hudBg.strokeRoundedRect(this.width - 290, 30, 260, 60, 15);
 
-            this.add.text(this.width - 160, 60, `ğŸ‘‘ Rekor: ${highScore}`, {
+            this.add.text(this.width - 160, 60, `👑 Rekor: ${highScore}`, {
                 fontSize: '28px', fill: '#F72585', fontFamily: 'Nunito', fontWeight: '900',
                 shadow: { offsetX: 0, offsetY: 0, color: '#F72585', blur: 10, fill: true }
             }).setOrigin(0.5).setDepth(105);
@@ -170,7 +170,7 @@ export default class Snake extends Phaser.Scene {
         else if (this.cursors.left.isDown  && this.snake.dx === 0) { this.snake.dx = -this.gridSize; this.snake.dy = 0; }
         else if (this.cursors.right.isDown && this.snake.dx === 0) { this.snake.dx = this.gridSize; this.snake.dy = 0; }
 
-        // Grid tabanlÄ± hareket tiklemesi
+        // Grid tabanlı hareket tiklemesi
         this.moveTimer += delta;
         if (this.moveTimer >= this.currentMoveSpeed) {
             this.moveTimer = 0;
@@ -178,7 +178,7 @@ export default class Snake extends Phaser.Scene {
             this.drawGame();
         }
 
-        // Elma nabÄ±z animasyonu iÃ§in elmayÄ± sÃ¼rekli Ã§izmiyoruz, drawGame iÃ§inde basitÃ§e Ã§iziyoruz ama
+        // Elma nabız animasyonu için elmayı sürekli çizmiyoruz, drawGame içinde basitçe çiziyoruz ama
         // efektleri orada veriyoruz.
     }
 
@@ -186,15 +186,15 @@ export default class Snake extends Phaser.Scene {
         this.snake.x += this.snake.dx;
         this.snake.y += this.snake.dy;
 
-        // 1. DUVAR Ã‡ARPIÅMASI (Ekrandan Ã§Ä±kma)
+        // 1. DUVAR ÇARPIŞMASI (Ekrandan çıkma)
         if (this.snake.x < 0 || this.snake.x >= this.width || this.snake.y < 0 || this.snake.y >= this.height) {
             this.triggerGameOver();
             return;
         }
 
-        // 2. KENDÄ°NE Ã‡ARPMA
+        // 2. KENDİNE ÇARPMA
         this.snake.cells.forEach((cell, index) => {
-            // Sadece hÃ¼cre listesinde varsa Ã§arpÄ±ÅŸÄ±r
+            // Sadece hücre listesinde varsa çarpışır
             if (this.snake.x === cell.x && this.snake.y === cell.y) {
                 this.triggerGameOver();
             }
@@ -202,10 +202,10 @@ export default class Snake extends Phaser.Scene {
 
         if (this.gameOver) return;
 
-        // GeÃ§miÅŸi kaydet (Kuyruk)
+        // Geçmişi kaydet (Kuyruk)
         this.snake.cells.unshift({ x: this.snake.x, y: this.snake.y });
         
-        // YÄ±lan bÃ¼yÃ¼mÃ¼yorsa son parÃ§ayÄ± sil
+        // Yılan büyümüyorsa son parçayı sil
         if (this.snake.cells.length > this.snake.maxCells) {
             this.snake.cells.pop();
         }
@@ -214,21 +214,21 @@ export default class Snake extends Phaser.Scene {
         if (this.snake.x === this.apple.x && this.snake.y === this.apple.y) {
             this.snake.maxCells++;
             this.score += 10;
-            this.scoreText.setText(`âš¡ Skor: ${this.score}`);
+            this.scoreText.setText(`⚡ Skor: ${this.score}`);
             
-            // Neon Juice: Patlama ve Ekran SarsÄ±ntÄ±sÄ±
+            // Neon Juice: Patlama ve Ekran Sarsıntısı
             this.eatBurst.emitParticleAt(this.apple.x + this.gridSize/2, this.apple.y + this.gridSize/2, 15);
             this.cameras.main.shake(100, 0.008);
             
-            // Pop-up skor yazÄ±sÄ±
+            // Pop-up skor yazısı
             const pt = this.add.text(this.apple.x + 20, this.apple.y, '+10', {
                 fontSize: '28px', fill: '#F72585', fontFamily: 'Nunito', fontWeight: '900'
             }).setOrigin(0.5).setDepth(20);
             this.tweens.add({ targets: pt, y: pt.y - 40, alpha: 0, duration: 600, onComplete: () => pt.destroy() });
 
-            // HÄ±zlanma (Zorluk eÄŸrisi)
+            // Hızlanma (Zorluk eğrisi)
             if (this.currentMoveSpeed > 60) {
-                this.currentMoveSpeed -= 3; // Her elmada azÄ±cÄ±k hÄ±zlanÄ±r
+                this.currentMoveSpeed -= 3; // Her elmada azıcık hızlanır
             }
 
             this.placeApple();
@@ -237,7 +237,7 @@ export default class Snake extends Phaser.Scene {
 
     placeApple() {
         let isCollision = true;
-        // Ä°Ã§eride gÃ¼venli bir alan bÄ±rakalÄ±m ki elma tam kenarda Ã§Ä±kmasÄ±n
+        // İçeride güvenli bir alan bırakalım ki elma tam kenarda çıkmasın
         const safeCols = this.cols - 2;
         const safeRows = this.rows - 2;
 
@@ -247,7 +247,7 @@ export default class Snake extends Phaser.Scene {
 
             isCollision = false;
             
-            // YÄ±lan oradaysa tekrar dene
+            // Yılan oradaysa tekrar dene
             if (this.apple.x === this.snake.x && this.apple.y === this.snake.y) isCollision = true;
             for (let cell of this.snake.cells) {
                 if (cell.x === this.apple.x && cell.y === this.apple.y) {
@@ -257,32 +257,32 @@ export default class Snake extends Phaser.Scene {
             }
         }
         
-        // Yeni elma doÄŸduÄŸunda ufak bir parÄ±ldama iÅŸareti eklenebilir
+        // Yeni elma doğduğunda ufak bir parıldama işareti eklenebilir
     }
 
     drawGame() {
         this.graphics.clear();
 
-        // â”€â”€ ELMAYI Ã‡Ä°Z (Glow Efektli Neon Meyve) â”€â”€
+        // ── ELMAYI ÇİZ (Glow Efektli Neon Meyve) ──
         const ax = this.apple.x + this.gridSize/2;
         const ay = this.apple.y + this.gridSize/2;
         
-        // Parlama halkasÄ±
+        // Parlama halkası
         this.graphics.fillStyle(0xF72585, 0.3);
         this.graphics.fillCircle(ax, ay, this.gridSize * 0.7);
         // Meyvenin kendisi
         this.graphics.fillStyle(0xFFD166, 1);
         this.graphics.fillRoundedRect(this.apple.x + 6, this.apple.y + 6, this.gridSize - 12, this.gridSize - 12, 8);
         
-        // â”€â”€ YILANI Ã‡Ä°Z (GÃ¶kkuÅŸaÄŸÄ± / Neon GeÃ§iÅŸi) â”€â”€
+        // ── YILANI ÇİZ (Gökkuşağı / Neon Geçişi) ──
         this.snake.cells.forEach((cell, index) => {
             const pad = 2;
             const size = this.gridSize - (pad * 2);
             
-            // Kafadan kuyruÄŸa doÄŸru renk aÃ§Ä±lÄ±mÄ± (YeÅŸil'den Maviye)
+            // Kafadan kuyruğa doğru renk açılımı (Yeşil'den Maviye)
             let rawColor = 0x06D6A0;
             if (index > 0) {
-                // Hue kaydÄ±rma mantÄ±ÄŸÄ± (basitÃ§e mavi dozu katalÄ±m)
+                // Hue kaydırma mantığı (basitçe mavi dozu katalım)
                 const blueAmount = Math.min(255, index * 8);
                 // 0x06D6A0 = 6, 214, 160 => Biz dinamik hexcod uretelim
                 const r = 6;
@@ -291,41 +291,41 @@ export default class Snake extends Phaser.Scene {
                 rawColor = (r << 16) | (g << 8) | b;
             }
 
-            // DÄ±ÅŸ Parlama / GÃ¶vde
+            // Dış Parlama / Gövde
             this.graphics.fillStyle(rawColor, 1);
             
-            // Kafa mÄ± kuyruk mu?
+            // Kafa mı kuyruk mu?
             if (index === 0) {
-                // Kafa yuvarlak hatlÄ± ve biraz dÄ±ÅŸa taÅŸÄ±yor (nefes alma efekti)
+                // Kafa yuvarlak hatlı ve biraz dışa taşıyor (nefes alma efekti)
                 this.graphics.fillRoundedRect(cell.x + 1, cell.y + 1, size+2, size+2, 10);
                 
-                // GÃ¶zler (Harekete yÃ¶ne baksÄ±n)
+                // Gözler (Harekete yöne baksın)
                 this.graphics.fillStyle(0xffffff, 1);
                 
-                // Basit gÃ¶z Ã§izimi
+                // Basit göz çizimi
                 let ex1, ey1, ex2, ey2;
-                if (this.snake.dx > 0) { // SaÄŸa
+                if (this.snake.dx > 0) { // Sağa
                     ex1 = cell.x + 24; ey1 = cell.y + 10;
                     ex2 = cell.x + 24; ey2 = cell.y + 26;
                 } else if (this.snake.dx < 0) { // Sola
                     ex1 = cell.x + 12; ey1 = cell.y + 10;
                     ex2 = cell.x + 12; ey2 = cell.y + 26;
-                } else if (this.snake.dy < 0) { // YukarÄ±
+                } else if (this.snake.dy < 0) { // Yukarı
                     ex1 = cell.x + 10; ey1 = cell.y + 12;
                     ex2 = cell.x + 26; ey2 = cell.y + 12;
-                } else { // AÅŸaÄŸÄ±
+                } else { // Aşağı
                     ex1 = cell.x + 10; ey1 = cell.y + 24;
                     ex2 = cell.x + 26; ey2 = cell.y + 24;
                 }
                 this.graphics.fillCircle(ex1, ey1, 5);
                 this.graphics.fillCircle(ex2, ey2, 5);
-                // GÃ¶zbebeÄŸi
+                // Gözbebeği
                 this.graphics.fillStyle(0x000000, 1);
                 this.graphics.fillCircle(ex1+1, ey1, 2);
                 this.graphics.fillCircle(ex2+1, ey2, 2);
 
             } else {
-                // GÃ¶vde - GittikÃ§e kÃ¼Ã§Ã¼len pad bÄ±rakalÄ±m ki kuyruk incelsin
+                // Gövde - Gittikçe küçülen pad bırakalım ki kuyruk incelsin
                 const tailPad = pad + Math.min(6, (index / this.snake.maxCells) * 6);
                 const tSize = this.gridSize - (tailPad * 2);
                 this.graphics.fillRoundedRect(cell.x + tailPad, cell.y + tailPad, tSize, tSize, 6);
@@ -336,19 +336,19 @@ export default class Snake extends Phaser.Scene {
     triggerGameOver() {
         this.gameOver = true;
         
-        // Kamera ÅŸiddetli sarsÄ±ntÄ± ve KÄ±rmÄ±zÄ± Flash
+        // Kamera şiddetli sarsıntı ve Kırmızı Flash
         this.cameras.main.shake(500, 0.03);
         this.cameras.main.flash(400, 255, 0, 50, 0.5);
 
-        // YÄ±lanÄ±n her parÃ§asÄ±ndan partikÃ¼l patlat (Kafadan daha Ã§ok)
+        // Yılanın her parçasından partikül patlat (Kafadan daha çok)
         this.snake.cells.forEach((cell, idx) => {
             this.deathBurst.emitParticleAt(cell.x + 20, cell.y + 20, idx === 0 ? 20 : 3);
         });
 
-        // Ekrana yÄ±lanÄ± bir daha Ã§izme
+        // Ekrana yılanı bir daha çizme
         this.graphics.clear();
 
-        // Rekor KaydÄ±
+        // Rekor Kaydı
         const engine = window.gameEngine || this.game.gameEngine;
         let newRec = false;
         if (engine) {
@@ -367,7 +367,7 @@ export default class Snake extends Phaser.Scene {
             panel.lineStyle(3, 0x06D6A0, 1);
             panel.strokeRoundedRect(this.width / 2 - 300, this.height / 2 - 180, 600, 360, 24);
 
-            this.add.text(this.width / 2, this.height / 2 - 120, 'OYUN BÄ°TTÄ°!', {
+            this.add.text(this.width / 2, this.height / 2 - 120, 'OYUN BİTTİ!', {
                 fontSize: '64px', fill: '#EF476F', fontFamily: 'Nunito', fontWeight: 'bold'
             }).setOrigin(0.5).setDepth(200);
 
@@ -376,13 +376,13 @@ export default class Snake extends Phaser.Scene {
             }).setOrigin(0.5).setDepth(200);
 
             if (newRec) {
-                const rt = this.add.text(this.width / 2, this.height / 2 + 50, 'ğŸ‰ YENÄ° REKOR! ğŸ‰', {
+                const rt = this.add.text(this.width / 2, this.height / 2 + 50, '🎉 YENİ REKOR! 🎉', {
                     fontSize: '38px', fill: '#06D6A0', fontFamily: 'Nunito', fontWeight: 'bold'
                 }).setOrigin(0.5).setDepth(200);
                 this.tweens.add({ targets: rt, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
             }
 
-            const rst = this.add.text(this.width / 2, this.height / 2 + 130, 'Ana MenÃ¼ye DÃ¶n', {
+            const rst = this.add.text(this.width / 2, this.height / 2 + 130, 'Ana Menüye Dön', {
                 fontSize: '26px', fill: '#aaa', fontFamily: 'Nunito', backgroundColor: '#333', padding: { x: 20, y: 10 }
             }).setOrigin(0.5).setDepth(200).setInteractive({ useHandCursor: true });
 
