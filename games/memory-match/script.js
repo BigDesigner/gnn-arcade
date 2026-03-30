@@ -562,10 +562,10 @@ export default class MemoryMatch extends Phaser.Scene {
         this.add.text(this.width/2, this.height/2+0, `Skor: ${this.score}`, {
             fontSize:'40px', fill:'#FFD166', fontFamily:'Nunito', fontWeight:'800'
         }).setOrigin(0.5);
-        this.add.text(this.width/2, this.height/2+80, 'Tekrar oynamak için tıklayın', {
-            fontSize:'24px', fill:'#aaa', fontFamily:'Nunito'
-        }).setOrigin(0.5);
-        this.input.once('pointerdown', () => this.scene.restart());
+        const btn1 = this.add.text(this.width/2, this.height/2+100, 'Tekrar Oyna', {
+            fontSize:'28px', fill:'#fff', fontFamily:'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+        btn1.once('pointerdown', () => this.scene.restart());
     }
 
     // ─────────────── VICTORY ───────────────
@@ -632,11 +632,13 @@ export default class MemoryMatch extends Phaser.Scene {
             }).setOrigin(0.5);
         }
 
-        this.add.text(this.width/2, this.height/2+160, 'Tekrar oynamak için tıklayın', {
-            fontSize:'24px', fill:'#aaa', fontFamily:'Nunito'
-        }).setOrigin(0.5);
+        const btn2 = this.add.text(this.width/2, this.height/2+160, 'Tekrar Oyna', {
+            fontSize:'28px', fill:'#fff', fontFamily:'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-        this.input.once('pointerdown', () => this.scene.restart());
+        this.time.delayedCall(300, () => {
+            btn2.once('pointerdown', () => this.scene.restart());
+        });
     }
 
     // ─────────────── UPDATE ───────────────

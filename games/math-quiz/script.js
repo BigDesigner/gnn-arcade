@@ -535,12 +535,12 @@ export default class MathQuiz extends Phaser.Scene {
             this.gameOverObjs.push(t3);
         }
 
-        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Menüye dönmek için tıklayın', {
-            fontSize: '26px', fill: '#aaa', fontFamily: 'Nunito'
-        }).setOrigin(0.5);
+        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Tekrar Oyna', {
+            fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
         this.gameOverObjs.push(t4);
 
-        this.input.once('pointerdown', () => {
+        t4.once('pointerdown', () => {
             this.clearScene();
             this.showMenu();
         });

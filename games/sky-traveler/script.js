@@ -412,13 +412,12 @@ export default class SkyTraveler extends Phaser.Scene {
                 this.tweens.add({ targets: rt, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
             }
 
-            const rst = this.add.text(this.width/2, this.height/2 + 150, 'Yeniden uçmak için tıkla 👉', {
-                fontSize: '28px', fill: '#FFF', fontFamily: 'Nunito'
-            }).setOrigin(0.5);
-            this.tweens.add({ targets: rst, alpha: 0.5, duration: 600, yoyo: true, repeat: -1 });
-
+            const rst = this.add.text(this.width/2, this.height/2 + 150, 'Tekrar Oyna', {
+                fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
+            }).setOrigin(0.5).setDepth(15).setInteractive({ useHandCursor: true });
+            
             this.time.delayedCall(300, () => {
-                this.input.once('pointerdown', () => this.scene.restart());
+                rst.once('pointerdown', () => this.scene.restart());
                 this.input.keyboard.once('keydown-SPACE', () => this.scene.restart());
             });
         });

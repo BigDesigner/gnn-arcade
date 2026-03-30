@@ -382,12 +382,12 @@ export default class Snake extends Phaser.Scene {
                 this.tweens.add({ targets: rt, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
             }
 
-            const rst = this.add.text(this.width / 2, this.height / 2 + 130, 'Ana Menüye Dön', {
-                fontSize: '26px', fill: '#aaa', fontFamily: 'Nunito', backgroundColor: '#333', padding: { x: 20, y: 10 }
+            const rst = this.add.text(this.width / 2, this.height / 2 + 130, 'Tekrar Oyna', {
+                fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
             }).setOrigin(0.5).setDepth(200).setInteractive({ useHandCursor: true });
 
             this.time.delayedCall(300, () => {
-                rst.on('pointerdown', () => this.scene.restart());
+                rst.once('pointerdown', () => this.scene.restart());
                 this.input.keyboard.once('keydown-SPACE', () => this.scene.restart());
             });
         });

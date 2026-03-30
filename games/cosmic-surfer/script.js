@@ -426,12 +426,12 @@ export default class CosmicSurfer extends Phaser.Scene {
             this.tweens.add({ targets: t3, scale: 1.1, duration: 400, yoyo: true, repeat: -1 });
         }
 
-        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Ana Menüye Dön', {
-            fontSize: '26px', fill: '#aaa', fontFamily: 'Nunito', backgroundColor: '#333', padding: { x: 20, y: 10 }
+        const t4 = this.add.text(this.width / 2, this.height / 2 + 130, 'Tekrar Oyna', {
+            fontSize: '28px', fill: '#fff', fontFamily: 'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
         }).setOrigin(0.5).setInteractive({ useHandCursor: true });
         this.gameOverObjs.push(t4);
 
-        t4.on('pointerdown', () => {
+        t4.once('pointerdown', () => {
             this.scene.restart();
         });
     }

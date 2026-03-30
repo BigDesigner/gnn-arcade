@@ -481,9 +481,9 @@ export default class SpaceDefender extends Phaser.Scene {
         this.add.text(this.width/2, this.height/2 + 20, `Skor: ${this.score}`, {
             fontSize:'42px', fill:'#FFD700', fontFamily:'Nunito', fontWeight:'bold'
         }).setOrigin(0.5);
-        this.add.text(this.width/2, this.height/2 + 100, 'Tekrar oynamak için tıklayın', {
-            fontSize:'26px', fill:'#aaa', fontFamily:'Nunito'
-        }).setOrigin(0.5);
-        this.input.once('pointerdown', () => this.scene.restart());
+        const btn = this.add.text(this.width/2, this.height/2 + 110, 'Tekrar Oyna', {
+            fontSize:'28px', fill:'#fff', fontFamily:'Nunito', backgroundColor: '#4A90E2', padding: { x: 30, y: 15 }
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+        btn.once('pointerdown', () => this.scene.restart());
     }
 }
