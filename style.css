@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+
+:root {
+    --primary: #4A90E2;
+    --accent: #F5A623;
+    --success: #7ED321;
+    --bg-main: #E8F4FD;
+    /* Açık pastel mavi */
+    --header-h: 70px;
+    --radius: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Fredoka', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    overflow-x: hidden;
+    color: #333;
+}
+
+.main-header {
+    height: var(--header-h);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+#game-selector {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid #E1E8ED;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    color: #444;
+    cursor: pointer;
+    background: white;
+}
+
+.welcome-title {
+    text-align: center;
+    color: var(--primary);
+    margin: 20px 0;
+    font-size: 2.2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+#canvas-wrapper {
+    width: 95vw;
+    max-width: 1000px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 6px solid white;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Grid Sistemi */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: var(--accent);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(245, 166, 35, 0.4);
+    transform: rotate(5deg);
+    z-index: 10;
+}
+
+.game-card {
+    position: relative;
+    background: white;
+    border-radius: var(--radius);
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+    border-bottom: 5px solid var(--primary);
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(74, 144, 226, 0.15);
+}
+
+.game-card h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.game-card p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Thumbnail Görselleri */
+.card-thumbnail {
+    width: 100%;
+    height: 160px;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #e0ecfb 0%, #f0e6ff 100%);
+    position: relative;
+}
+
+.card-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.game-card:hover .card-thumbnail img {
+    transform: scale(1.08);
+}
+
+.card-thumbnail-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: linear-gradient(135deg, #e0ecfb 0%, #f0e6ff 100%);
+}
+
+/* Oyun alanı paneli */
+#game-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 50px;
+}
+
+.game-controls {
+    display: flex;
+    gap: 20px;
+    background: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Çocuk dostu buton tasarımı */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 0px #2c5ba0;
+    /* 3D etkisi */
+    background: var(--primary);
+    color: white;
+}
+
+.btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0px #2c5ba0;
+}
+
+.btn.secondary {
+    background: var(--accent);
+    box-shadow: 0 4px 0px #c78314;
+}
+
+.btn.secondary:active {
+    box-shadow: 0 0px 0px #c78314;
+}

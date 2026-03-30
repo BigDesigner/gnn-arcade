@@ -1,0 +1,53 @@
+{
+  "games": [
+    {
+      "id": "snake",
+      "title": "Süper Yılan",
+      "thumbnail": "assets/thumbnails/snake.png",
+      "description": "Elmaları topla, ama kuyruğuna dikkat et!",
+      "path": "games/snake/"
+    },
+    {
+      "id": "math-quiz",
+      "title": "Matematik Avcısı",
+      "thumbnail": "assets/thumbnails/math.png",
+      "description": "Hızlı düşün, doğru balonu yakala!",
+      "path": "games/math-quiz/"
+    },
+    {
+      "id": "memory-match",
+      "title": "Hafıza Kartları",
+      "thumbnail": "assets/thumbnails/memory.png",
+      "description": "Eşleşen meyveleri bul ve hafızanı sına!",
+      "path": "games/memory-match/"
+    },
+    {
+      "id": "space-defender",
+      "title": "Göktaşı Savunucusu",
+      "thumbnail": "assets/thumbnails/space.png",
+      "description": "Dünyayı düşen göktaşlarından koru!",
+      "path": "games/space-defender/"
+    },
+    {
+      "id": "sky-traveler",
+      "title": "Gökyüzü Yolcusu",
+      "thumbnail": "assets/thumbnails/sky.png",
+      "description": "Engellerin arasından uçarak geç!",
+      "path": "games/sky-traveler/"
+    },
+    {
+      "id": "ice-runner",
+      "title": "Buzlu Koşucu",
+      "thumbnail": "assets/thumbnails/ice-runner.png",
+      "description": "Buzlu yollarda kayarak ilerle!",
+      "path": "games/ice-runner/"
+    },
+    {
+      "id": "cosmic-surfer",
+      "title": "Kozmik Sörfçü",
+      "thumbnail": "assets/thumbnails/cosmic.png",
+      "description": "Neon evvrende yerçekimine meydan oku ve sörf yap!",
+      "path": "games/cosmic-surfer/"
+    }
+  ]
+}

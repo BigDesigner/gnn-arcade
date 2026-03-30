@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GNNgame | Çocuklar İçin Güvenli Oyun Alanı</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Çocuklara uygun yuvarlak fontlar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Phaser 3 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo" id="go-home">GNNgame</div>
+        <nav class="quick-nav">
+            <select id="game-selector">
+                <option value="">Oyun Seçiniz...</option>
+            </select>
+        </nav>
+    </header>
+
+    <main id="app-container">
+        <section id="home-view" class="view">
+            <h1 class="welcome-title">Hangi Oyunu Oynamak İstersin?</h1>
+            <div id="game-grid" class="grid-container"></div>
+        </section>
+
+        <section id="game-view" class="view hidden">
+            <div id="canvas-wrapper">
+                <canvas id="main-canvas"></canvas>
+            </div>
+            <div class="game-controls">
+                <button id="back-to-home" class="btn" onclick="location.hash=''">Ana Sayfaya Dön</button>
+                <button id="toggle-fullscreen" class="btn secondary">Tam Ekran</button>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>
